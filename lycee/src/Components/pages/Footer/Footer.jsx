@@ -15,7 +15,7 @@ const Footer = () => {
         <div className="footer-section">
           <h2>ABOUT Lycee</h2>
           <ul>
-            <li><Link to="/apply">Apply</Link></li>
+            <li><Link to="/apply">Applys</Link></li>
             <li><Link to="/degrees">Degrees</Link></li>
             <li><Link to="/give">Give</Link></li>
             <li><Link to="/news">News</Link></li>

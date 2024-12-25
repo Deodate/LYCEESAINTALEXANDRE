@@ -4,6 +4,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
+import logo from '../../../assets/images/logo.png';
 
 const Menu = () => {
   return (
@@ -11,12 +12,13 @@ const Menu = () => {
       <Navbar expand="lg" bg="white" className="py-0 position-relative">
         <Container>
           <Navbar.Brand as={Link} to="/">
-            <img
-              src="/logo.png"
-              alt="Logo"
-              height="40"
-              className="d-inline-block align-top"
-            />
+          <img
+          src={logo}
+          alt="School panoramic view"
+          height="40"
+          // width="40"
+          className="d-inline-block align-top"
+        />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

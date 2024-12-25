@@ -1,11 +1,18 @@
 import React from 'react';
+// import logo from '../../../assets/images/logo.png';
 
-const Container = () => {
+const HomepageContainer = () => {
   return (
-    <homepageContainer>
-    
-    </homepageContainer>
+    <div className="relative w-full">
+       <div className="w-[500px] h-[200px] overflow-hidden">
+        {/* <img
+          src={logo}
+          alt="School panoramic view"
+          className="w-full h-full object-cover"
+        /> */}
+      </div>
+    </div>
   );
 };
 
-export default Container;
+export default HomepageContainer;

@@ -7,6 +7,7 @@ import Contacts from './Components/pages/Contacts/Contacts';
 import Footer from './Components/pages/Footer/Footer';
 import Top from './Components/pages/Top/Top';
 import Menu from './Components/pages/Menu/Menu';
+import HomepageContainer from './Components/pages/HomepageContainer/HomepageContainer';
 
 function App() {
   return (
@@ -18,6 +19,11 @@ function App() {
 
       {/* Main Navigation */}
       <Menu />
+
+      {/* Main Navigation  End */}
+
+      {/* Main Navigation */}
+      <HomepageContainer />
 
       {/* Main Navigation  End */}
 
