@@ -15,7 +15,7 @@ const Menu = () => {
           <img
           src={logo}
           alt="School panoramic view"
-          height="40"
+          height="80"
           // width="40"
           className="d-inline-block align-top"
         />

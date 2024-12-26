@@ -329,3 +329,282 @@ footer {
     font-size: 1rem;
   }
 }
+
+/* Homepage banner styles */
+.homepage-banner {
+  width: 100%;
+  position: flex;
+  justify-content: center;
+  padding: 10px 15px;
+}
+
+.banner-container {
+  width: 100%;
+  height: 355px; /* Adjust this value to your preferred height */
+  overflow: hidden;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Optional hover effect */
+.banner-image:hover {
+  transform: scale(1.02);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .banner-container {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-container {
+    height: 200px; /* Even smaller for very small devices */
+  }
+}
+
+
+.welcome-title {
+  text-align: center;
+  color: #384db5; 
+  font-size: 2.9rem;
+  margin: 1.5rem 0;
+  font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .welcome-title {
+    font-size: 2rem;
+    margin: 1rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-title {
+    font-size: 1.75rem;
+    margin: 0.75rem 0;
+  }
+}
+
+.welcome-section {
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.welcome-title {
+  color: #384db5; 
+  font-size: 2.5rem;
+  margin: 1.5rem 0;
+  font-weight: bold;
+}
+
+.welcome-text {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: #333;
+  margin: 1rem auto;
+  max-width: 900px; /* Controls the line length for better readability */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .welcome-title {
+    font-size: 2rem;
+    margin: 1rem 0;
+  }
+  
+  .welcome-text {
+    font-size: 1.1rem;
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-title {
+    font-size: 1.75rem;
+    margin: 0.75rem 0;
+  }
+  
+  .welcome-text {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+}
+
+/* excellence-section */
+.excellence-section {
+  margin: 4rem 0;
+  overflow: hidden;
+  padding-left: 15px;  /* Added */
+  padding-right: 15px; /* Added */
+}
+
+.excellence-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.excellence-content {
+  padding: 3rem 15px; /* Changed from 4rem to 15px */
+}
+
+.excellence-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.green-line {
+  width: 50px;
+  height: 4px;
+  background-color: #1B5E20;
+  margin: 1.5rem 0;
+}
+
+.excellence-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.program-link {
+  padding: 1rem 0;
+  text-decoration: none;
+  color: #000;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.program-link:hover {
+  color: #1B5E20;
+  text-decoration: none;
+}
+
+.arrow {
+  font-size: 1.2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+  .excellence-content {
+    padding: 2rem 15px; /* Changed to maintain consistent 15px padding */
+  }
+  
+  .excellence-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .excellence-content {
+    padding: 2rem 15px; /* Changed to maintain consistent 15px padding */
+  }
+  
+  .excellence-title {
+    font-size: 1.75rem;
+  }
+  
+  .program-link {
+    font-size: 1rem;
+  }
+}
+
+.numbers-section {
+  background-color: #1B5E20;
+  color: white;
+  margin-top: 4rem;
+}
+
+.numbers-content {
+  padding: 4rem 15px;
+}
+
+.impact-subtitle {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.numbers-title {
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.white-line {
+  width: 50px;
+  height: 4px;
+  background-color: white;
+  margin: 1.5rem 0 3rem 0;
+}
+
+.statistics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.statistic-item {
+  margin-bottom: 2rem;
+}
+
+.statistic-number {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #90EE90; /* Light green color */
+}
+
+.statistic-label {
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.numbers-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+  .numbers-content {
+    padding: 3rem 15px;
+  }
+  
+  .numbers-title {
+    font-size: 2.5rem;
+  }
+  
+  .statistic-number {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .statistics-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .statistic-item {
+    margin-bottom: 1.5rem;
+  }
+  
+  .numbers-title {
+    font-size: 2rem;
+  }
+}

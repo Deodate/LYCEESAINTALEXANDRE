@@ -35,7 +35,6 @@ const Footer = () => {
           <h2>CONNECT WITH US</h2>
           <div className="social-links">
             <Link to="#"><i className="bi bi-facebook"></i></Link>
-            <Link to="#"><i className="bi bi-snapchat"></i></Link>
             <Link to="#"><i className="bi bi-instagram"></i></Link>
             <Link to="#"><i className="bi bi-youtube"></i></Link>
             <Link to="#"><i className="bi bi-twitter-x"></i></Link>
