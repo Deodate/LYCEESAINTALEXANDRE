@@ -49,7 +49,7 @@ const Menu = () => {
                 <NavDropdown.Item as={Link} to="/students/life">Student Life</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/students/resources">Resources</NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link as={Link} to="/athletics">Church</Nav.Link>
+              <Nav.Link as={Link} to="/athletics">Contact</Nav.Link>
               <Nav.Link as={Link} to="/search" className="search-link">
                 <i className="bi bi-search"></i>
               </Nav.Link>
