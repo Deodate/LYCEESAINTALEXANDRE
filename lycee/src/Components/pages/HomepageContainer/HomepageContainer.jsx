@@ -1,10 +1,13 @@
 import React from 'react';
-import bg from '../../../assets/images/txtimg.png';
-import teacherImage from '../../../assets/images/PereMario.jpg'; // Update with your image path
+import teacherImage from '../../../assets/images/PereMario.jpg'; 
 import studentsImage from '../../../assets/images/students.jpeg';
 import NewsSection from '../NewsSection/NewsSection';
+import studentsimg from '../../../assets/images/student2.jpg';
+import VideoSection from '../Video/VideoSection';
+
 const HomepageContainer = () => {
-  const programLinks = [
+
+  const links = [
     { text: "O'Level Programs", path: "/programs/olevel" },
     { text: "A'Level Programs", path: "/programs/alevel" },
     { text: "Special Programs", path: "/programs/special" },
@@ -22,7 +25,7 @@ const HomepageContainer = () => {
       <div className="homepage-banner">
         <div className="banner-container">
           <img
-            src={bg}
+           src={teacherImage}
             alt="School panoramic view"
             className="banner-image"
           />
@@ -36,30 +39,30 @@ const HomepageContainer = () => {
           fostering a vibrant and engaging environment that makes building new friendships effortless!
         </p>
       </div>
-      
-      <div className="container-fluid excellence-section">
+
+      <div className="container-fluid transform-section">
         <div className="row align-items-center">
           <div className="col-lg-6 p-0">
             <img
-              src={teacherImage}
-              alt="Teacher instructing students"
-              className="img-fluid excellence-image"
+             src={studentsimg}
+              alt="Educational research equipment"
+              className="img-fluid transform-image"
             />
           </div>
-          <div className="col-lg-6 excellence-content">
-            <h2 className="excellence-title">Defined by Excellence</h2>
+          <div className="col-lg-6 transform-content">
+            <h2 className="transform-title">Transforming Lives</h2>
             <div className="green-line"></div>
-            <p className="excellence-description">
-              LSASM's comprehensive academic programs are rigorous, interdisciplinary, and practical. 
-              Our expert faculty provide a supportive learning environment that fosters curiosity, 
-              encourages innovative thinking, and cultivates lifelong learning.
+            <p className="transform-description">
+              Our integrated research and educational platforms ensure that breakthroughs in the classroom 
+              translate to student success in life. And our comprehensive academic ecosystem elevates 
+              collaboration and creativity to benefit people across our institution and around the world.
             </p>
-            <div className="program-links">
-              {programLinks.map(({ text, path }) => (
+            <div className="transform-links">
+              {links.map(({ text, path }) => (
                 <a 
                   key={text}
                   href={path}
-                  className="program-link d-flex justify-content-between"
+                  className="transform-link d-flex justify-content-between align-items-center"
                 >
                   <span>{text}</span>
                   <span className="arrow">→</span>
@@ -145,6 +148,8 @@ const HomepageContainer = () => {
           </div>
         </div>
       </div>
+
+      < VideoSection/>
 
       <NewsSection />
     </>

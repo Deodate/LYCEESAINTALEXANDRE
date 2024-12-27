@@ -34,11 +34,20 @@ const NewsSection = () => {
           <h2 className="news-title mb-4">Latest News</h2>
           <div className="green-line"></div>
           <p className="news-description mb-4">
-            Stay informed about the latest happenings at LSASM. From academic achievements to exciting campus events, we capture it all.
-          </p>
-          <a href="/news" className="btn btn-primary">
-            More News →
-          </a>
+            Stay informed about the latest happenings at LSASM. From academic achievements to exciting campus events, we capture it all. <br/><br/>
+         
+            <a
+              href="/news"
+              className="btn btn-primary"
+              style={{
+                '--bs-btn-padding-y': '0.25rem',
+                '--bs-btn-padding-x': '0.5rem',
+                '--bs-btn-font-size': '0.75rem',
+              }}
+            >
+              More News →
+            </a>
+            </p>
         </div>
 
         {/* Right Column - News Grid */}
@@ -48,8 +57,8 @@ const NewsSection = () => {
               <div key={index} className="col-md-4 mb-4">
                 <a href={item.link} className="news-card text-decoration-none">
                   <div className="news-image-wrapper mb-3">
-                    <img 
-                      src={item.image} 
+                    <img
+                      src={item.image}
                       alt={item.title}
                       className="img-fluid w-100 rounded"
                     />
