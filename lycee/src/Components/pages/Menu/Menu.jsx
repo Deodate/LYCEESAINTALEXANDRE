@@ -16,7 +16,6 @@ const Menu = () => {
           src={logo}
           alt="School panoramic view"
           height="80"
-          // width="40"
           className="d-inline-block align-top"
         />
           </Navbar.Brand>
@@ -31,7 +30,7 @@ const Menu = () => {
                 <NavDropdown.Item as={Link} to="/about/our-school">Our School</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/about/history">History</NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link as={Link} to="/admissions">Admissions</Nav.Link>
+              <Nav.Link as={Link} to="/admissions">History</Nav.Link>
               <NavDropdown
                 title="Academics"
                 id="academics-dropdown"
@@ -40,8 +39,8 @@ const Menu = () => {
                 <NavDropdown.Item as={Link} to="/academics/programs">Programs</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/academics/faculty">Faculty</NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link as={Link} to="/research">Research</Nav.Link>
-              <Nav.Link as={Link} to="/arts">Art</Nav.Link>
+              <Nav.Link as={Link} to="/research">Babyeyi</Nav.Link>
+              <Nav.Link as={Link} to="/arts">News  & Events</Nav.Link>
               <NavDropdown
                 title="Students"
                 id="students-dropdown"
@@ -50,7 +49,7 @@ const Menu = () => {
                 <NavDropdown.Item as={Link} to="/students/life">Student Life</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/students/resources">Resources</NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link as={Link} to="/athletics">Athletics</Nav.Link>
+              <Nav.Link as={Link} to="/athletics">Church</Nav.Link>
               <Nav.Link as={Link} to="/search" className="search-link">
                 <i className="bi bi-search"></i>
               </Nav.Link>

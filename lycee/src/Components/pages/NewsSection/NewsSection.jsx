@@ -1,4 +1,5 @@
 import React from 'react';
+import studentsImage from '../../../assets/images/students.jpeg';
 
 const NewsSection = () => {
   const newsItems = [
@@ -6,62 +7,65 @@ const NewsSection = () => {
       category: 'Academic Excellence',
       date: 'Dec 20, 2024',
       title: 'LSASM Students Excel in National Science Competition',
-      image: '/api/placeholder/400/320',
-      link: '#'
+      image: studentsImage,
+      link: '/news/science-competition'
     },
     {
       category: 'School Life',
       date: 'Dec 20, 2024',
       title: 'Annual Cultural Festival Showcases Student Talents',
-      image: '/api/placeholder/400/320',
-      link: '#'
+      image: studentsImage,
+      link: '/news/cultural-festival'
     },
     {
       category: 'Community',
       date: 'Dec 19, 2024',
       title: 'LSASM Launches New Community Outreach Program',
-      image: '/api/placeholder/400/320',
-      link: '#'
+      image: studentsImage,
+      link: '/news/community-outreach'
     }
   ];
 
   return (
-    <div className="container-fluid py-12 bg-white">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex flex-col md:flex-row gap-8 items-start">
-          {/* Left Column - Header */}
-          <div className="md:w-1/4">
-            <h2 className="text-4xl font-bold mb-4">Latest News</h2>
-            <p className="text-gray-600 mb-6">
-              Stay informed about the latest happenings at LSASM. From academic achievements to exciting campus events, we capture it all.
-            </p>
-            <a href="#" className="inline-flex items-center bg-green-700 text-white px-6 py-2 rounded hover:bg-green-800 transition-colors">
-              More News →
-            </a>
-          </div>
+    <div className="container-fluid news-section py-5">
+      <div className="row">
+        {/* Left Column - Header */}
+        <div className="col-lg-3">
+          <h2 className="news-title mb-4">Latest News</h2>
+          <div className="green-line"></div>
+          <p className="news-description mb-4">
+            Stay informed about the latest happenings at LSASM. From academic achievements to exciting campus events, we capture it all.
+          </p>
+          <a href="/news" className="btn btn-primary">
+            More News →
+          </a>
+        </div>
 
-          {/* Right Column - News Grid */}
-          <div className="md:w-3/4 grid md:grid-cols-3 gap-6">
+        {/* Right Column - News Grid */}
+        <div className="col-lg-9">
+          <div className="row">
             {newsItems.map((item, index) => (
-              <a key={index} href={item.link} className="group">
-                <div className="relative overflow-hidden rounded-lg">
-                  <img 
-                    src={item.image} 
-                    alt={item.title}
-                    className="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="mt-4">
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <span>{item.category}</span>
-                    <span>•</span>
-                    <span>{item.date}</span>
+              <div key={index} className="col-md-4 mb-4">
+                <a href={item.link} className="news-card text-decoration-none">
+                  <div className="news-image-wrapper mb-3">
+                    <img 
+                      src={item.image} 
+                      alt={item.title}
+                      className="img-fluid w-100 rounded"
+                    />
                   </div>
-                  <h3 className="mt-2 text-xl font-semibold group-hover:text-green-700 transition-colors">
-                    {item.title}
-                  </h3>
-                </div>
-              </a>
+                  <div className="news-content">
+                    <div className="d-flex align-items-center text-muted mb-2">
+                      <span className="news-category">{item.category}</span>
+                      <span className="mx-2">•</span>
+                      <span className="news-date">{item.date}</span>
+                    </div>
+                    <h3 className="news-card-title h5">
+                      {item.title}
+                    </h3>
+                  </div>
+                </a>
+              </div>
             ))}
           </div>
         </div>

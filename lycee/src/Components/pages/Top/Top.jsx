@@ -8,7 +8,7 @@ const Top = () => {
       <div className="top-nav">
         <Container className="d-flex justify-content-between align-items-center">
           <div>
-            <Link to="/">Muhura Paroisse</Link>
+            <Link to="/">Paroisse Muhura</Link>
             <Link to="/">Gatsibo</Link>
             <Link to="/">Sant'Antonio Maria Zaccaria</Link>
           </div>
