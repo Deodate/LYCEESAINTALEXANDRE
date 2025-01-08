@@ -6,13 +6,15 @@ const Top = () => {
   return (
     <header>
       <div className="top-nav">
-        <Container className="d-flex justify-content-between align-items-center">
-          <div>
+        <Container fluid className="px-0 d-flex justify-content-between align-items-center">
+          <div className="left-nav-links">
             <Link to="/">Paroisse Muhura</Link>
+            <span className="text-white divider">|</span>
             <Link to="/">Gatsibo</Link>
+            <span className="text-white divider">|</span>
             <Link to="/">Sant'Antonio Maria Zaccaria</Link>
           </div>
-          <div>
+          <div className="right-nav-links">
             <Link to="/explore">Barnabite Fathers</Link>
           </div>
         </Container>

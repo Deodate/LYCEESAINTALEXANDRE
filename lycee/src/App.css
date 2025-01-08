@@ -22,6 +22,7 @@
 .btn-warning{
   margin-top: 21px;
 }
+
 /* Top navigation styles */
 .top-nav {
   background-color: #304a9a;
@@ -40,6 +41,34 @@
   text-decoration: none;
 }
 
+.left-nav-links {
+  padding-left: 5px;
+}
+
+.right-nav-links {
+  padding-right: 5px;
+}
+
+/* Override Bootstrap container padding */
+.container-fluid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* For mobile responsiveness */
+@media (max-width: 768px) {
+  .top-nav a {
+    font-size: 0.8rem;
+    padding: 0 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-nav a {
+    font-size: 0.7rem;
+    padding: 0 0.25rem;
+  }
+}
 /* Main navigation styles */
 .navbar-nav .nav-link,
 .navbar-nav .dropdown-toggle {

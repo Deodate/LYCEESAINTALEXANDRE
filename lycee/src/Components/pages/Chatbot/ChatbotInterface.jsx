@@ -49,7 +49,7 @@ const ChatAssistant = () => {
                             Which of these best describes you?
                         </p>
                         <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-                            {["Future Student", "Current Student", "Parent", "School Counselor", "Alumni", "Faculty/Staff"].map(
+                            {["Future Student", "Current Student", "Parent", "Lycee Teacher", "Alumni", "Option"].map(
                                 (option) => (
                                     <button
                                         key={option}
