@@ -7,26 +7,28 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-section">
           <h6>Lycee Saint Alexandre Sauli Muhura</h6>
+          <p><i class="bi bi-phone text-info"></i>+250 788 </p>
+          <p><i class="bi bi-envelope text-danger"></i> lyce@gmail.com  </p>
           <p>Easter Province</p>
           <p>Muhura, Sector</p>
           <Link to="/contact" className="contact-button">Contact Us</Link>
         </div>
 
         <div className="footer-section">
-          <h2>ABOUT Lycee</h2>
+          <h2>ABOUT Lycee</h2> 
           <ul>
-            <li><Link to="/apply">Applys</Link></li>
-            <li><Link to="/give">Give</Link></li>
-            <li><Link to="/news">News</Link></li>
+            <li><Link to="/apply">Diocese Byumba</Link></li>
+            <li><Link to="/give">Conference Episcopale du Rwanda</Link></li>
+            <li><Link to="/news">Vatican</Link></li>
           </ul>
         </div>
 
         <div className="footer-section">
           <h2>QUICK LINKS</h2>
           <ul>
-            <li><Link to="/events">Events</Link></li>
-            <li><Link to="/careers">Careers</Link></li>
-            <li><Link to="/alumni">Alumni</Link></li>
+            <li><Link to="/apply">WDA - Workforce Development Authority</Link></li>
+            <li><Link to="/give">NESA - National Examination and School Inspection Authority</Link></li>
+            <li><Link to="/news">MINEDUC</Link></li>
           </ul>
         </div>
 

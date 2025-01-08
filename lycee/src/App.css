@@ -19,6 +19,9 @@
   border-bottom: 1px solid #e9ecef;
 }
 
+.btn-warning{
+  margin-top: 21px;
+}
 /* Top navigation styles */
 .top-nav {
   background-color: #304a9a;
@@ -438,7 +441,7 @@ footer {
   }
 }
 
-/* excellence-section */
+/* Excellence-section */
 
 .excellence-section {
   margin: 4rem 0;
@@ -636,13 +639,13 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem;
+  padding: 5px;
   color: #333;
   text-decoration: none;
   border-bottom: 1px solid #eee;
   transition: all 0.3s ease;
-  font-size: 1.25rem;
-  font-weight: 500;
+  font-size: 4px;
+  font-weight: 400;
 }
 
 .program-link:hover {
@@ -685,7 +688,7 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px;
+  padding: 4px;
   color: #333;
   text-decoration: none;
   border-bottom: 1px solid #eee;

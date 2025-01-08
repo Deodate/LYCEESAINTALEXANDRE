@@ -38,7 +38,7 @@ const NewsSection = () => {
          
             <a
               href="/news"
-              className="btn btn-primary"
+              className="btn btn-outline-primary"
               style={{
                 '--bs-btn-padding-y': '0.25rem',
                 '--bs-btn-padding-x': '0.5rem',

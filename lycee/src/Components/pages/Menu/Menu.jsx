@@ -12,12 +12,12 @@ const Menu = () => {
       <Navbar expand="lg" bg="white" className="py-0 position-relative">
         <Container>
           <Navbar.Brand as={Link} to="/">
-          <img
-          src={logo}
-          alt="School panoramic view"
-          height="80"
-          className="d-inline-block align-top"
-        />
+            <img
+              src={logo}
+              alt="School panoramic view"
+              height="80"
+              className="d-inline-block align-top"
+            />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -39,7 +39,12 @@ const Menu = () => {
                 <NavDropdown.Item as={Link} to="/academics/programs">Programs</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/academics/faculty">Faculty</NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link as={Link} to="/research">Babyeyi</Nav.Link>
+              {/* Change the Nav.Link to a button wrapped in Link */}
+              <Link to="/research">
+                <button type="button" className="btn btn-warning btn-sm">
+                  BABYEYI
+                </button>
+              </Link>
               <Nav.Link as={Link} to="/arts">News  & Events</Nav.Link>
               <NavDropdown
                 title="Students"
