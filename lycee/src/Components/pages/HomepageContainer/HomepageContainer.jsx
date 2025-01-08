@@ -4,6 +4,9 @@ import studentsImage from '../../../assets/images/students.jpeg';
 import NewsSection from '../NewsSection/NewsSection';
 import studentsimg from '../../../assets/images/student2.jpg';
 import VideoSection from '../Video/VideoSection';
+import ChatAssistant from '../Chatbot/ChatbotInterface';
+
+
 
 const HomepageContainer = () => {
 
@@ -147,10 +150,14 @@ const HomepageContainer = () => {
           </div>
         </div>
       </div>
-
+     
+     
+  
       < VideoSection/>
 
       <NewsSection />
+
+      <ChatAssistant />
     </>
   );
 };

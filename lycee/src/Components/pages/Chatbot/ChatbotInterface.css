@@ -1,0 +1,207 @@
+/* Chat container, positioning */
+.chat-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+/* Button to open/close the chat */
+.chat-toggle-btn {
+    width: 50px;
+    height: 50px;
+    background-color: #f9ee4d;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Chat window styles */
+.chat-window {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+    height: 400px; /* Fixed height for the chat window */
+    background-color: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent content overflow outside the chat window */
+}
+
+/* Header section styling */
+.chat-header {
+    background-color: #4051fa;
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chat-header h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #fff;
+}
+
+/* Close button in the header */
+.close-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 16px;
+}
+
+/* Chat content section */
+.chat-content {
+    padding: 20px;
+    flex: 1;
+    overflow-y: auto; /* Enable vertical scrolling */
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100% - 80px); /* Deduct space for header/footer */
+    padding-bottom: 60px; /* Add space for input section */
+}
+
+/* Message and options styling */
+.chat-content p {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.question {
+    font-weight: bold;
+}
+
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Button styling for options */
+.option-btn {
+    background-color: #fff;
+    border: 1px solid #a52a2a;
+    color: #a52a2a;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Footer section for input */
+.chat-footer {
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    background-color: #f9f9f9;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #f9f9f9;
+}
+
+/* Input field styling */
+.input-field {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+/* Send button styling */
+.send-btn {
+    background-color: #4051fa;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Styling for message bubbles */
+.message {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+/* Sender message bubble */
+.sender {
+    align-self: flex-end;
+    background-color: #cce5ff;
+    border-radius: 15px;
+    padding: 10px;
+    position: relative;
+    max-width: 80%;
+    margin-right: 10px;
+}
+
+/* Receiver message bubble */
+.receiver {
+    align-self: flex-start;
+    background-color: #f1f1f1;
+    border-radius: 15px;
+    padding: 10px;
+    position: relative;
+    max-width: 80%;
+    margin-left: 10px;
+}
+
+/* Icon below the sender message */
+.message-icon {
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Styling for sender's message and user icon */
+.message {
+    display: flex;
+    flex-direction: row; /* Make sender's message bubble appear beside the icon */
+    margin: 10px 0;
+    align-items: flex-start;
+}
+
+/* Sender's message styling */
+.sender {
+    background-color: #cce5ff;
+    border-radius: 15px;
+    padding: 10px;
+    position: relative;
+    max-width: 80%;
+    margin-left: 10px; /* Space between icon and message */
+}
+
+/* Sender's icon styling */
+.sender .icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Icon placed below the sender's message */
+.message-icon {
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
