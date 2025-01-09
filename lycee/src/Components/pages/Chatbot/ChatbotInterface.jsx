@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import "./ChatbotInterface.css";
@@ -7,6 +7,15 @@ const ChatAssistant = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [inputValue, setInputValue] = useState("");
     const [messages, setMessages] = useState([]);
+    const messagesEndRef = useRef(null);
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
 
     const toggleChat = () => {
         setIsOpen(!isOpen);
@@ -38,87 +47,73 @@ const ChatAssistant = () => {
                         </button>
                     </div>
 
-                    {/* Default Message Section */}
-                    <div style={{ padding: "20px", flex: 1 }}>
-                        <p style={{ fontSize: "14px", color: "#333", marginBottom: "10px" }}>
-                            This is Lycee AI! Before we get started, let's get to know each other.
-
-                            
-                        </p>
-                        <p style={{ fontSize: "14px", fontWeight: "bold", color: "#333", marginBottom: "10px" }}>
-                            Which of these best describes you?
-                        </p>
-                        <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-                            {["Future Student", "Current Student", "Parent", "Lycee Teacher", "Alumni", "Option"].map(
-                                (option) => (
-                                    <button
-                                        key={option}
+                    {/* Messages Section with Scroll */}
+                    <div className="chat-content" style={{
+                        flex: 1,
+                        overflowY: "auto",
+                        display: "flex",
+                        flexDirection: "column-reverse"
+                    }}>
+                        <div ref={messagesEndRef} />
+                        <div style={{ display: "flex", flexDirection: "column" }}>
+                            {messages.map((msg, index) => (
+                                <div key={index} style={{ display: "flex", alignItems: "flex-start", margin: "10px 0" }}>
+                                    {msg.sender === "user" && (
+                                        <img
+                                            src="path_to_user_icon.png"
+                                            alt="user icon"
+                                            style={{
+                                                width: "30px",
+                                                height: "30px",
+                                                borderRadius: "50%",
+                                                marginRight: "10px",
+                                            }}
+                                        />
+                                    )}
+                                    <div
                                         style={{
-                                            backgroundColor: "#fff",
-                                            border: "1px solid #a52a2a",
-                                            color: "#a52a2a",
+                                            backgroundColor: msg.sender === "user" ? "#cce5ff" : "#f8f9fa",
+                                            borderRadius: "15px",
                                             padding: "10px",
-                                            borderRadius: "5px",
-                                            cursor: "pointer",
-                                            fontSize: "14px",
+                                            maxWidth: "80%",
+                                            position: "relative",
                                         }}
                                     >
-                                        {option}
-                                    </button>
-                                )
-                            )}
+                                        <p style={{ margin: 0, fontSize: "14px", color: "#333" }}>{msg.text}</p>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                    </div>
 
-                    {/* Messages Section */}
-                    <div className="chat-content">
-                        {messages.map((msg, index) => (
-                            <div key={index} style={{ display: "flex", alignItems: "flex-start", margin: "10px 0" }}>
-                                {msg.sender === "user" && (
-                                    <img
-                                        src="path_to_user_icon.png" // Replace with your actual user icon image path
-                                        alt="user icon"
-                                        style={{
-                                            width: "30px",
-                                            height: "30px",
-                                            borderRadius: "50%",
-                                            marginRight: "10px",
-                                        }}
-                                    />
-                                )}
-                                <div
-                                    style={{
-                                        backgroundColor: msg.sender === "user" ? "#cce5ff" : "#f8f9fa", // Adjust colors for user vs other sender
-                                        borderRadius: "15px",
-                                        padding: "10px",
-                                        maxWidth: "80%",
-                                        position: "relative",
-                                    }}
-                                >
-                                    <p style={{ margin: 0, fontSize: "14px", color: "#333" }}>{msg.text}</p>
-                                    {msg.sender === "user" && (
-                                        <div
+                        {/* Default Message Section */}
+                        <div style={{ padding: "20px" }}>
+                            <p style={{ fontSize: "12px", color: "#333", marginBottom: "10px" }}>
+                                This is Lycee AI! Before we get started, let's get to know each other.
+                            </p>
+                            <p style={{ fontSize: "12px", fontWeight: "bold", color: "#333", marginBottom: "10px" }}>
+                                Which of these best describes you?
+                            </p>
+                            <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+                                {["Future Student", "Current Student", "Parent", "Lycee Teacher", "Alumni", "Option"].map(
+                                    (option) => (
+                                        <button
+                                            key={option}
                                             style={{
-                                                position: "absolute",
-                                                bottom: "-12px",
-                                                left: "50%",
-                                                transform: "translateX(-50%)",
+                                                backgroundColor: "#fff",
+                                                border: "1px solid #a52a2a",
+                                                color: "#a52a2a",
+                                                padding: "10px",
+                                                borderRadius: "5px",
+                                                cursor: "pointer",
+                                                fontSize: "12px",
                                             }}
                                         >
-                                            <img
-                                                src="path_to_user_icon.png" // Replace with your actual user icon image path
-                                                alt="user icon"
-                                                style={{
-                                                    width: "20px",
-                                                    height: "20px",
-                                                    borderRadius: "50%",
-                                                }}
-                                            />
-                                        </div>
-                                    )}
-                                </div>
+                                            {option}
+                                        </button>
+                                    )
+                                )}
                             </div>
-                        ))}
+                        </div>
                     </div>
 
                     {/* Chat Footer */}

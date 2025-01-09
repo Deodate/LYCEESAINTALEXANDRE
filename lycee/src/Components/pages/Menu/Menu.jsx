@@ -30,7 +30,7 @@ const Menu = () => {
                 <NavDropdown.Item as={Link} to="/about/our-school">Our School</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/about/history">History</NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link as={Link} to="/admissions">History</Nav.Link>
+              {/* <Nav.Link as={Link} to="/admissions">History</Nav.Link> */}
               <NavDropdown
                 title="Academics"
                 id="academics-dropdown"
