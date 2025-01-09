@@ -922,4 +922,11 @@ footer {
     max-width: 100%;
   }
 }
+.icon-number {
+  font-size: 10px; 
+  font-weight: bold;
+  color: rgb(8, 7, 7);
+  pointer-events: none;
+  margin-right: 2px;
+}
 

@@ -28,20 +28,22 @@
     font-size: 2em;
 }
 
+
 .welcome-text {
     font-family: 'Times New Roman', Times, serif;
     line-height: 1.4;
     margin-bottom: 20px;
     text-align: justify;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .programs-list {
     display: flex;
     flex-direction: column;
     align-items: flex-start; /* Changed from center to flex-start */
-    margin: 20px 0;
+    margin: 17px 0;
     width: 100%;
+    font-size: 12px;
   }
 
   .program-item {
@@ -84,3 +86,5 @@
         padding: 0;
     }
 }
+
+/* Existing styles */

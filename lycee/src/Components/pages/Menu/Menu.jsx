@@ -1,13 +1,13 @@
-// Menu.js
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
+import { MessageCircle } from 'lucide-react';
 import logo from '../../../assets/images/logo.png';
 
-const Menu = ({ onNavigate }) => {
+const Menu = ({ onNavigate, messageCount = 0 }) => {
     const navigate = useNavigate();
 
     const handleNavigation = (path) => {
@@ -32,25 +32,20 @@ const Menu = ({ onNavigate }) => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
-                            {/* Modified About link */}
+                            <Nav.Link onClick={() => handleNavigation('/')}>Home</Nav.Link>
                             <Nav.Link onClick={() => handleNavigation('/about')}>History</Nav.Link>
-                            {/* <Link to="/about">About</Link> */}
-                            <NavDropdown
-                                title="Academics"
-                                id="academics-dropdown"
-                                className="nav-item"
-                            >
-                                <NavDropdown.Item onClick={() => handleNavigation('/academics/programs')}>
-                                    Programs
-                                </NavDropdown.Item>
-                                <NavDropdown.Item onClick={() => handleNavigation('/academics/faculty')}>
-                                    Faculty
-                                </NavDropdown.Item>
-                            </NavDropdown>
-                            <Nav.Link onClick={() => handleNavigation('/research')}>BABYEYI</Nav.Link>
+                            <Link to="/research">
+                                <button
+                                    type="button"
+                                    className="btn btn-warning btn-sm"
+                                    onClick={() => handleNavigation('/research')}
+                                >
+                                    BABYEYI
+                                </button>
+                            </Link>
                             <Nav.Link onClick={() => handleNavigation('/arts')}>News & Events</Nav.Link>
                             <NavDropdown
-                                title="Students"
+                                title="Staff"
                                 id="students-dropdown"
                                 className="nav-item"
                             >
@@ -61,6 +56,28 @@ const Menu = ({ onNavigate }) => {
                                     Resources
                                 </NavDropdown.Item>
                             </NavDropdown>
+                            <Nav.Link
+                                onClick={() => handleNavigation('/messages')}
+                                className="position-relative"
+                            >
+                                <div className="d-flex align-items-center position-relative">
+                                    <div className="icon-container position-relative">
+                                        <MessageCircle className="me-1" size={26} style={{ color: 'red' }} />
+                                        <span className="icon-number position-absolute top-50 start-50 translate-middle">
+                                            5
+                                        </span>
+                                    </div>
+                                    Message
+                                    {messageCount > 0 && (
+                                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            {messageCount > 99 ? '99+' : messageCount}
+                                        </span>
+                                    )}
+                                </div>
+
+
+
+                            </Nav.Link>
                             <Nav.Link onClick={() => handleNavigation('/athletics')}>Contact</Nav.Link>
                             <Nav.Link onClick={() => handleNavigation('/search')} className="search-link">
                                 <i className="bi bi-search"></i>
