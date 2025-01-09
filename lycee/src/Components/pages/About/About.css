@@ -1,0 +1,86 @@
+.about-container {
+    display: flex;
+    width: 100%;
+    padding: 20px;
+}
+
+.sidebar-image {
+    width: 35%;
+    padding: 15px;
+    margin-top: 80px;
+}
+
+.sidebar-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.welcome-section {
+    width: 65%;
+    padding: 0 20px;
+}
+
+.welcome-title {
+    color: #304a9a;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.welcome-text {
+    font-family: 'Times New Roman', Times, serif;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    text-align: justify;
+    font-size: 14px;
+}
+
+.programs-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Changed from center to flex-start */
+    margin: 20px 0;
+    width: 100%;
+  }
+
+  .program-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-family: 'Times New Roman', Times, serif;
+    width: 100%; /* Changed from fit-content to 100% */
+    padding-left: 40px; /* Add some padding from the left if needed */
+  }
+
+.program-item i {
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+.program-item span {
+    font-size: 1.1em;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .about-container {
+        flex-direction: column;
+    }
+
+    .sidebar-image {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .sidebar-image img {
+        max-width: 300px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .welcome-section {
+        width: 100%;
+        padding: 0;
+    }
+}

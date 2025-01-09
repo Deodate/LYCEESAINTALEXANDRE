@@ -11,26 +11,23 @@ import HomepageContainer from './Components/pages/HomepageContainer/HomepageCont
 
 function App() {
   return (
-    <div>
+    <div className="App">
       {/* Top Navigation Start */}
       <Top />
-
-      {/* Top Navigation End */}
 
       {/* Main Navigation */}
       <Menu />
 
-      {/* Main Navigation  End */}
-
-      {/* Main Navigation */}
-      <HomepageContainer />
-
-      {/* Main Navigation  End */}
-
+      {/* Routes */}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={
+          <>
+            <HomepageContainer />
+            <Home />
+          </>
+        } />
         <Route path="/babyeyi" element={<Babyeyi />} />
-        <Route path="/about/*" element={<About />} />
+        <Route path="/about" element={<About />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/admissions" element={<Home />} />
         <Route path="/academics/*" element={<Home />} />
@@ -40,9 +37,8 @@ function App() {
         <Route path="/athletics" element={<Home />} />
       </Routes>
 
-      {/* Footer Navigation Start */}
+      {/* Footer Navigation */}
       <Footer />
-      {/* Footer Navigation End */}
     </div>
   );
 }
