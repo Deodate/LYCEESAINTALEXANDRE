@@ -7,6 +7,7 @@ import Contacts from './Components/pages/Contacts/Contacts';
 import Footer from './Components/pages/Footer/Footer';
 import Top from './Components/pages/Top/Top';
 import Menu from './Components/pages/Menu/Menu';
+import DioceseByumba from './Components/pages/DioceseByumba/DioceseByumba';
 import VisionValues from './Components/pages/VisionValues/VisionValues';
 import ChatAssistant from './Components/pages/Chatbot/ChatbotInterface';
 import Inspiration from './Components/pages/Inspiration/Inspiration';
@@ -33,6 +34,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/VisionValues" element={<VisionValues />} />
         <Route path="/Inspiration" element={<Inspiration />} />
+        <Route path="/DioceseByumba" element={<DioceseByumba />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/admissions" element={<Home />} />
         <Route path="/academics/*" element={<Home />} />

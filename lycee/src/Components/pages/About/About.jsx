@@ -3,6 +3,7 @@ import "./About.css";
 import VisionValues from "../VisionValues/VisionValues";
 import Inspiration from "../Inspiration/Inspiration";
 import schoolImage from '../../../assets/images/PereMario.jpg';
+import DioceseByumba from "../DioceseByumba/DioceseByumba";
 
 function About() {
     return (
@@ -73,6 +74,8 @@ function About() {
             <VisionValues />
 
             <Inspiration />
+
+            <DioceseByumba />
         </div>
     );
 }

@@ -2,6 +2,7 @@
     display: flex;
     width: 100%;
     padding: 20px;
+    background-color: #f2f3f1;
 }
 
 .sidebar-image {
