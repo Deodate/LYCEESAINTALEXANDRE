@@ -10,7 +10,7 @@ const Inspiration = () => {
           <img src={PopeImage} alt="Saint Alexandre Sauli" />
           <p className="from-pope-francis">--- Pope Francis in 2021</p>
         </div>
-        <div className="text-section">
+        <div className="texts-section">
           <h1>Education: A Path to Loving Life</h1>
           <p className="inspiration-text">
           " If something is true, it is good and beautiful; 

@@ -53,7 +53,7 @@ const HomepageContainer = () => {
           </div>
           <div className="col-lg-6 transform-content">
             <h2 className="transform-title">Transforming Lives</h2>
-            <div className="green-line"></div>
+            <div className="green-line-trans"></div>
             <p className="transform-description">
               Our integrated research and educational platforms ensure that breakthroughs in the classroom 
               translate to student success in life. And our comprehensive academic ecosystem elevates 

@@ -13,9 +13,9 @@ function About() {
                     <img src={schoolImage} alt="School" />
                 </div>
                 
-                <div className="welcome-section">
-                    <h1 className="welcome-title">History and Location</h1>
-                    <p className="welcome-text">
+                <div className="welcome-sections">
+                    <h1 className="welcome-titles">History and Location</h1>
+                    <p className="welcome-texts">
                         Now known as Lycée Saint Alexandre Sauli de Muhura, 
                         was founded on September 17, 1990, by the Barnabite Fathers, 
                         who initiated the project with the local mayor's support.
@@ -26,7 +26,7 @@ function About() {
                         tracks in <b>Law</b>, <b>Administration</b> and <b>Economics.</b>
                     </p>
 
-                    <p className="welcome-text">
+                    <p className="welcome-texts">
                         In 1991, the Barnabite Fathers sought full 
                         control to establish it as a private, 
                         subsidized institution. By 1992,
@@ -38,30 +38,30 @@ function About() {
                         offering programs in:
                     </p>
 
-                    <div className="programs-list">
-                        <div className="program-item">
+                    <div className="programs-lists">
+                        <div className="program-items">
                             <i className="bi bi-check-circle-fill text-primary"></i>
                             <span><b>Accounting</b></span>
                         </div>
-                        <div className="program-item">
+                        <div className="program-items">
                             <i className="bi bi-check-circle-fill text-primary"></i>
                             <span><b>Fashion Design / (FAD)</b></span>
                         </div>
-                        <div className="program-item">
+                        <div className="program-items">
                             <i className="bi bi-check-circle-fill text-primary"></i>
                             <span><b>Software Development / (SWD)</b></span>
                         </div>
-                        <div className="program-item">
+                        <div className="program-items">
                             <i className="bi bi-check-circle-fill text-primary"></i>
                             <span><b>Network and Internet Technology / (NIT)</b></span>
                         </div>
-                        <div className="program-item">
+                        <div className="program-items">
                             <i className="bi bi-check-circle-fill text-primary"></i>
                             <span><b>Computer System and Architecture / (CSA)</b></span>
                         </div>
                     </div>
 
-                    <p className="welcome-text">
+                    <p className="welcome-texts">
                         Today, Lycée Saint Alexandre Sauli Muhura serves 657 students,
                         fostering job readiness and reducing unemployment in the community. 
                         The school officially received accreditation in 2010, marking a milestone 

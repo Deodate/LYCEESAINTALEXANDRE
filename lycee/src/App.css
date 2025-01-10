@@ -500,6 +500,13 @@ footer {
   margin: 1.5rem 0;
 }
 
+.green-line-trans {
+  width: 50px;
+  height: 3px;
+  background-color: #1B5E20;
+  margin: 0.5rem 0 1rem 0; /* Reduce top margin to bring it closer to title */
+}
+
 .excellence-description {
   font-size: 1.1rem;
   line-height: 1.6;
@@ -700,8 +707,12 @@ footer {
 
 /* Transform Links (similar styling) */ 
 
+.transform-title {
+  margin-bottom: 0.5rem; /* Reduce bottom margin of title */
+}
+
 .transform-image {
-  width: 100%;
+  width: 95%;
   /* height: 50%; */
   padding: 14px;
   object-fit: cover;
@@ -759,6 +770,15 @@ footer {
     width: 35px;
     height: 35px;
   }
+}
+
+.transform-description {
+  margin: 0 18px 0 0;  /* Add 10px margin to the right */
+  padding: 10px 0;  /* Add some vertical padding */
+  white-space: normal;  /* Allow text to wrap naturally */
+  text-align: left;  /* Align text to the left */
+  line-height: 1.6;  /* Maintain readable line height */
+  color: #333;
 }
 
 /* News Section */

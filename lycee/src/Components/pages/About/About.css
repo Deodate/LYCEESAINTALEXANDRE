@@ -18,19 +18,19 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.welcome-section {
+.welcome-sections {
     width: 65%;
     padding: 0 20px;
 }
 
-.welcome-title {
+.welcome-titles {
     color: #304a9a;
     margin-bottom: 20px;
     font-size: 2em;
 }
 
 
-.welcome-text {
+.welcome-texts {
     font-family: 'Times New Roman', Times, serif;
     line-height: 1.4;
     margin-bottom: 20px;
@@ -38,7 +38,7 @@
     font-size: 16px;
 }
 
-.programs-list {
+.programs-lists {
     display: flex;
     flex-direction: column;
     align-items: flex-start; /* Changed from center to flex-start */
@@ -47,7 +47,7 @@
     font-size: 12px;
   }
 
-  .program-item {
+  .program-items {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
@@ -56,12 +56,12 @@
     padding-left: 40px; /* Add some padding from the left if needed */
   }
 
-.program-item i {
+.program-items i {
     margin-right: 10px;
     font-size: 1.2em;
 }
 
-.program-item span {
+.program-items span {
     font-size: 1.1em;
 }
 
@@ -82,7 +82,7 @@
         display: block;
     }
 
-    .welcome-section {
+    .welcome-sections {
         width: 100%;
         padding: 0;
     }

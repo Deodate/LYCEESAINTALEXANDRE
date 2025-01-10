@@ -6,8 +6,8 @@ const VisionValues = () => {
   return (
     <div className="vision-container">
       <div className="content-wrapper">
-        <div className="text-section">
-          <h1 className="welcome-title">Vision and Values</h1>
+        <div className="text-sectionV">
+          <h1 className="welcomes-title">Vision and Values</h1>
           <p className="vision-text">
             At Lycée Saint Alexandre Sauli de Muhura, our goal is sustaining strategic growth that 
             positively impacts students' lives. From practical education to skill development to 

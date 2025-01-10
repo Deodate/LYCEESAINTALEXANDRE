@@ -11,13 +11,13 @@
     margin-left: 40px;
   }
   
-  .text-section {
+  .texts-section {
     flex: 1;
     max-width: 500px;
     margin-right: 40px;
   }
   
-  .text-section h1 {
+  .texts-section h1 {
     font-size: 32px;
     font-weight: 700;
     margin-bottom: 16px;
