@@ -2,11 +2,11 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Home from './Components/pages/Home/Home';
 import About from './Components/pages/About/About';
-import Babyeyi from './Components/pages/Babyeyi/Babyeyi';
 import Contacts from './Components/pages/Contacts/Contacts';
 import Footer from './Components/pages/Footer/Footer';
 import Top from './Components/pages/Top/Top';
 import Menu from './Components/pages/Menu/Menu';
+import Babyeyi from './Components/pages/Babyeyi/Babyeyi';
 import DioceseByumba from './Components/pages/DioceseByumba/DioceseByumba';
 import VisionValues from './Components/pages/VisionValues/VisionValues';
 import ChatAssistant from './Components/pages/Chatbot/ChatbotInterface';
@@ -30,13 +30,12 @@ function App() {
             <Home />
           </>
         } />
-        <Route path="/babyeyi" element={<Babyeyi />} />
         <Route path="/about" element={<About />} />
         <Route path="/VisionValues" element={<VisionValues />} />
         <Route path="/Inspiration" element={<Inspiration />} />
         <Route path="/DioceseByumba" element={<DioceseByumba />} />
         <Route path="/contacts" element={<Contacts />} />
-        <Route path="/admissions" element={<Home />} />
+        <Route path="/Babyeyi" element={<Babyeyi />} />
         <Route path="/academics/*" element={<Home />} />
         <Route path="/research" element={<Home />} />
         <Route path="/arts" element={<Home />} />
