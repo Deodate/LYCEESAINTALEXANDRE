@@ -5,12 +5,12 @@ import './Babyeyi.css';
 function Babyeyi() {
   return (
     <div className="pdf-container">
-      <embed 
-        src={BabyeyiFile}
-        type="application/pdf"
+      <iframe
+        src={`${BabyeyiFile}#toolbar=0&navpanes=0&scrollbar=0`}
         className="pdf-viewer"
-        alt="pdf"
+        title="PDF viewer"
       />
+      <p>hd</p>
     </div>
   );
 }

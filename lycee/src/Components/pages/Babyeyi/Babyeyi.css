@@ -1,25 +1,27 @@
 .pdf-container {
     width: 100%;
-    max-width: 1600px; /* Increased from 1200px */
-    margin: 20px auto;
-    padding: 20px;
-    box-sizing: border-box;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
 }
 
 .pdf-viewer {
     width: 100%;
-    height: 1000px; /* Increased from 800px */
-    border: 3px solid #f40909;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(235, 15, 15, 0.1);
+    height: 100%;
+    border: none;
+}
+
+iframe {
+    width: 70%;
+    height: 100%;
+    border: none;
+    display: block;
 }
 
 @media screen and (max-width: 768px) {
     .pdf-container {
-        padding: 10px;
-    }
-
-    .pdf-viewer {
-        height: 800px; /* Increased from 600px */
+        height: 100vh;
     }
 }
