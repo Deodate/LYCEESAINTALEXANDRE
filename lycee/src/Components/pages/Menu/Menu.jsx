@@ -34,7 +34,7 @@ const Menu = ({ onNavigate, messageCount = 0 }) => {
                         <Nav className="ms-auto">
                             <Nav.Link onClick={() => handleNavigation('/')}>Home</Nav.Link>
                             <Nav.Link onClick={() => handleNavigation('/about')}>History</Nav.Link>
-                            <Link to="/research">
+                            <Link to="/babyeyi">
                                 <button
                                     type="button"
                                     className="btn btn-warning btn-sm"
