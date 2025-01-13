@@ -4,24 +4,43 @@ import './Babyeyi.css';
 
 function Babyeyi() {
   const handlePrint = () => {
-    window.print();
+    const printContent = document.getElementById('pdf-frame');
+    const WinPrint = window.open('', '', 'width=900,height=650');
+    WinPrint.document.write(`
+      <html>
+        <head>
+          <title>Print PDF</title>
+        </head>
+        <body>
+          <iframe
+            src="${BabyeyiFile}"
+            style="width:100%; height:100vh; border:none;"
+            frameborder="0"
+          ></iframe>
+        </body>
+      </html>
+    `);
+    WinPrint.document.close();
+    WinPrint.focus();
+    WinPrint.print();
+    WinPrint.close();
   };
 
   const handleDownload = () => {
-    // Create an anchor element and trigger download
     const link = document.createElement('a');
     link.href = BabyeyiFile;
-    link.download = 'document.pdf';
-    document.body.appendChild(link);
+    link.download = 'babyeyi.pdf';
+    document.body.appendChild(link);      
     link.click();
     document.body.removeChild(link);
   };
 
   return (
     <div className="container-fluid">
-      <div className="button-container mb-3 mt-3">
+      <div className="button-container mb-3 mt-3 no-print">
+        <p>Babyeyi letter for academics year 2025 II TERM</p>
         <button 
-         class="btn btn-primary btn-sm"
+          className="btn btn-primary btn-sm"
           onClick={handleDownload}
         >
           <i className="bi bi-download me-2"></i>
@@ -35,8 +54,9 @@ function Babyeyi() {
           Print File
         </button>
       </div>
-      <div className="pdf-container">
+      <div className="pdf-container print-only">
         <iframe
+          id="pdf-frame"
           src={`${BabyeyiFile}#toolbar=0&navpanes=0&scrollbar=0&bgcolor=ffffff`}
           className="pdf-viewer"
           title="PDF viewer"
