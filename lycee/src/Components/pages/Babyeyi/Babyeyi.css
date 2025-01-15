@@ -7,20 +7,24 @@
     position: relative;
     display: flex;
     justify-content: center;
+    align-items: center; /* Add this */
+    background-color: white;
 }
 
 .pdf-viewer {
     width: 100%;
     height: 100%;
     border: none;
+    max-width: 1200px; /* Add this to limit width on large screens */
 }
 
 iframe {
-    width: 70%;
+    width: 100%; /* Change from 70% to 100% */
     height: 100%;
     border: none;
     display: block;
     margin: 0 auto;
+    background-color: white;
 }
 
 .button-container {
@@ -29,62 +33,44 @@ iframe {
     align-items: center;
     gap: 10px;
     padding: 15px;
+    flex-wrap: wrap; /* Add this */
 }
 
 .button-container p {
     margin: 0;
-    margin-right: 15px;
+    text-align: center; /* Add this */
+    width: 100%; /* Add this */
+    margin-bottom: 10px; /* Add this */
 }
 
-/* Bootstrap icon styles */
-.btn i {
-    font-size: 1rem;
-    vertical-align: middle;
-}
-
-/* Print styles */
-@media print {
-    .no-print {
-        display: none !important;
-    }
-    
-    .print-only {
-        display: block !important;
-        height: 100vh !important;
-    }
-    
-    .pdf-container {
-        height: 100vh !important;
-    }
-    
-    iframe {
-        width: 100% !important;
-        height: 100% !important;
-    }
-    
-    body {
-        margin: 0;
-        padding: 0;
-    }
-}
-
+/* Updated mobile styles */
 @media screen and (max-width: 768px) {
     .pdf-container {
-        height: 80vh;
+        height: calc(100vh - 150px); /* Adjust height to account for buttons */
+        padding: 10px; /* Add some padding */
     }
     
     .button-container {
         flex-direction: column;
-        align-items: center;
+        align-items: stretch; /* Change from center */
+        padding: 10px;
     }
     
     .button-container .btn {
         width: 100%;
-        max-width: 200px;
-        margin-bottom: 10px;
+        margin: 5px 0;
+        padding: 10px;
     }
     
     iframe {
         width: 100%;
+        height: 100%;
+    }
+    
+    /* Add this to handle very small screens */
+    @media screen and (max-width: 480px) {
+        .pdf-container {
+            height: calc(100vh - 180px);
+        }
     }
 }
