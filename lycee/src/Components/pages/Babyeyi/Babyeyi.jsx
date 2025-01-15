@@ -62,7 +62,27 @@ function Babyeyi() {
   return (
     <div className="container-fluid p-0">
       <div className="button-container mb-3 mt-3 no-print">
-        <p>Babyeyi letter for academics year 2025 II TERM</p>
+      <p 
+          style={{
+            fontFamily: 'Times New Roman',
+            fontSize: '14px',
+            width: '27%',
+            color: 'black',
+            backgroundColor: 'yellow',
+            padding: '10px',
+            margin: '0',
+            display: 'inline-block',
+            position: 'relative' 
+          }}
+        >
+          Babyeyi letter for academics year <b>2025  TERM II</b> 
+          <i className="bi bi-bell-fill" style={{ 
+   marginLeft: '8px',
+   fontSize: '16px',
+   color: '#dc3545',  // Bootstrap danger color
+   verticalAlign: 'middle'
+ }}></i>
+        </p>
         <button
           className="btn btn-primary"
           onClick={handleDownload}

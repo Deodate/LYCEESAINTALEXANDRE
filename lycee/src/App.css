@@ -290,6 +290,37 @@ footer {
   display: flex;
   gap: 1rem;
   font-size: 1.5rem;
+  margin-left: 60px;
+}
+
+/* Social media icon styles */
+.social-links .bi-instagram {
+  background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.5rem;
+}
+
+.social-links .bi-youtube {
+  color: #FF0000;
+  font-size: 1.5rem;
+}
+
+/* Ensure proper hover effects */
+.social-links a:hover .bi-instagram,
+.social-links a:hover .bi-youtube {
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+/* Adjust icon spacing */
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0.5rem;
 }
 
 .footer-bottom {

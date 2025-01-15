@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-section">
           <h6>Lycee Saint Alexandre Sauli Muhura</h6>
-          <p><i class="bi bi-phone text-info"></i>+250 788 </p>
+          <p><i class="bi bi-phone text-info"></i>+250 788 000 000 </p>
           <p><i class="bi bi-envelope text-danger"></i> lyce@gmail.com  </p>
           <p>Easter Province</p>
           <p>Muhura, Sector</p>
@@ -38,7 +38,7 @@ const Footer = () => {
             <Link to="#"><i className="bi bi-facebook"></i></Link>
             <Link to="#"><i className="bi bi-instagram"></i></Link>
             <Link to="#"><i className="bi bi-youtube"></i></Link>
-            <Link to="#"><i className="bi bi-twitter-x"></i></Link>
+            <Link to="#"><i className="bi bi-x"></i></Link>
             <Link to="#"><i className="bi bi-linkedin"></i></Link>
           </div>
         </div>
