@@ -79,7 +79,7 @@ function Babyeyi() {
           <i className="bi bi-bell-fill" style={{ 
    marginLeft: '8px',
    fontSize: '16px',
-   color: '#dc3545',  // Bootstrap danger color
+   color: '#dc3545',  
    verticalAlign: 'middle'
  }}></i>
         </p>

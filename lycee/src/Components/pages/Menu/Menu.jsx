@@ -43,7 +43,7 @@ const Menu = ({ onNavigate, messageCount = 0 }) => {
                                     BABYEYI
                                 </button>
                             </Link>
-                            <Nav.Link onClick={() => handleNavigation('/arts')}>News & Events</Nav.Link>
+                            <Nav.Link onClick={() => handleNavigation('/newsEvents')}>News & Events</Nav.Link>
                             <NavDropdown
                                 title="Staff"
                                 id="students-dropdown"

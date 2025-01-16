@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Home from './Components/pages/Home/Home';
@@ -12,6 +13,7 @@ import VisionValues from './Components/pages/VisionValues/VisionValues';
 import ChatAssistant from './Components/pages/Chatbot/ChatbotInterface';
 import Inspiration from './Components/pages/Inspiration/Inspiration';
 import HomepageContainer from './Components/pages/HomepageContainer/HomepageContainer';
+import NewsEvents from './Components/pages/NewsEvents/NewsEvents';
 
 function App() {
   return (
@@ -37,7 +39,7 @@ function App() {
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/Babyeyi" element={<Babyeyi />} />
         <Route path="/academics/*" element={<Home />} />
-        <Route path="/research" element={<Home />} />
+        <Route path="/newsEvents" element={<NewsEvents />} />
         <Route path="/arts" element={<Home />} />
         <Route path="/students/*" element={<Home />} />
         <Route path="/athletics" element={<Home />} />
