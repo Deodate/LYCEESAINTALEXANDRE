@@ -1,3 +1,14 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
 .App {
   text-align: center;
 }
@@ -27,6 +38,10 @@
 .top-nav {
   background-color: #304a9a;
   padding: 0.5rem 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 .top-nav a {
@@ -665,7 +680,8 @@ footer {
 .nav-dots {
   position: absolute;
   top: 10px;
-  right:-480px;
+  right: 0;
+  left: auto;
   z-index: 10;
 }
 
@@ -1001,5 +1017,259 @@ footer {
   .pdf-viewer {
       height: 600px;
   }
+}
+
+/* Styles for the main content area below the fixed header */
+.main-content-area {
+  margin-top: 50px; /* Add space below the fixed header */
+}
+
+/* Styling for the Signin page card */
+.signin-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Changed from center to flex-start */
+  /* min-height: calc(100vh - 50px); // Adjust height considering the fixed header */
+  padding: 20px;
+  padding-top: 50px; /* Add 50px padding at the top */
+}
+
+.auth-card {
+  background-color: #fff;
+  border-radius: 8px; /* Added border-radius back for the card */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-width: 400px; /* Adjusted max-width for the form appearance */
+  width: 100%;
+}
+
+.auth-card-header {
+  background-color: #304a9a; /* Footer color */
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 15px 20px;
+  text-align: center; /* Changed from left to center */
+}
+
+.auth-card-body {
+  padding: 20px;
+  text-align: center; /* Center align body content */
+  line-height: 1.6;
+  color: #333;
+}
+
+.auth-card-body h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #000; /* Ensure title is black */
+}
+
+.auth-tabs {
+  display: flex;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.auth-tab.active {
+  background-color: #304a9a; /* Footer color for active tab */
+  color: white;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 9.5px 12px; /* Reduced vertical padding to reduce height */
+  border: 1px solid #e0e0e0;
+  border-radius: 4px; /* Added border-radius for rounded corners */
+  font-size: 1rem;
+}
+
+/* Styling for select dropdown to match input fields */
+.form-input-style {
+  width: 100%;
+  padding: 9.5px 12px; /* Match input padding */
+  border: 1px solid #e0e0e0;
+  border-radius: 4px; /* Match input border-radius */
+  font-size: 1rem;
+  /* Add some appearance reset for consistency */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #fff; /* Ensure background is white */
+  cursor: pointer;
+}
+
+.forgot-password {
+  display: block;
+  text-align: right;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  color: #007bff; /* Blue color for links */
+  text-decoration: none;
+}
+
+.login-button {
+  /* width: 100%; Removed full width */
+  padding: 5px 12px; /* Reduced vertical padding */
+  background-color: #3020fa; /* Changed to the requested color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 1; /* Allow buttons to grow and shrink */
+  margin: 0 5px; /* Add horizontal margin */
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+}
+
+/* Styling for the Cancel button */
+.cancel-button {
+  /* width: 100%; Removed full width */
+  padding: 5px 12px; /* Reduced vertical padding */
+  background-color: #dc3545; /* Red color for cancel button */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  /* margin-top: 10px; Removed top margin */
+  flex: 1; /* Allow buttons to grow and shrink */
+  margin: 0 5px; /* Add horizontal margin */
+}
+
+.cancel-button:hover {
+  background-color: #c82333;
+}
+
+/* Styling for the Signup submit button */
+.signup-submit-button {
+  padding: 5px 12px; /* Match login/cancel button padding */
+  background-color: #084203; /* Dark green color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 1; /* Match login/cancel button flex behavior */
+  margin: 0 5px; /* Match login/cancel button horizontal margin */
+}
+
+.signup-submit-button:hover {
+  background-color: #063102; /* Darker shade for hover */
+}
+
+/* Styling for the button group container */
+.auth-button-group {
+  display: flex; /* Use flexbox to align buttons in a row */
+  gap: 10px; /* Add space between buttons */
+  margin-top: 20px; /* Add some space above the button group */
+  padding: 0 20px; /* Add horizontal padding to reduce button width */
+}
+
+.signup-link {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.signup-link a {
+  color: #007bff; /* Blue color for links */
+  text-decoration: none;
+}
+
+/* Styling for invalid input fields */
+.invalid-input {
+  border-color: red !important; /* Turn border red when invalid */
+}
+
+/* Styling for valid/focused input fields */
+.form-group input:not(.invalid-input):focus,
+.form-group input:not(.invalid-input):not(:placeholder-shown),
+.form-input-style:not(.invalid-input):focus,
+.form-input-style:not(.invalid-input):not(:placeholder-shown) {
+  border-color: #28a745 !important; /* Green color for valid/focused input */
+}
+
+/* Styling for login form inputs when they have a value (and are not focused/invalid) */
+.auth-card-body form input:not(:placeholder-shown):not(:focus):not(.invalid-input) {
+  border-color: #28a745 !important; /* Green color for inputs with value */
+}
+
+/* Styles for phone number input with country code */
+.phone-input-container {
+  display: flex;
+  align-items: center;
+  width: 100%; /* Ensure it takes full width like other form groups */
+  border: 1px solid #e0e0e0; /* Apply border to the container */
+  border-radius: 4px; /* Apply border-radius to the container */
+  overflow: hidden; /* Hide overflowing borders */
+}
+
+.phone-input-container:focus-within {
+  border-color: #28a745 !important; /* Green border on focus */
+}
+
+.country-code-select {
+  padding: 9.5px 12px; /* Match vertical padding of input */
+  border: none; /* Remove border */
+  background-color: #f8f9fa; /* Slightly different background to distinguish */
+  font-size: 1rem;
+  cursor: pointer;
+  /* Remove default arrow and appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  text-align: center;
+  outline: none; /* Remove outline on focus */
+  border-right: 1px solid #e0e0e0; /* Add a subtle separator */
+}
+
+.country-code-select:focus {
+    border: none; /* Ensure no border on focus */
+    outline: none; /* Ensure no outline on focus */
+}
+
+.phone-input-container input[type="tel"] {
+  flex-grow: 1; /* Allow input to take remaining space */
+  padding: 9.5px 12px; /* Match padding */
+  border: none; /* Remove individual border */
+  border-radius: 0; /* Remove individual border-radius */
+  font-size: 1rem;
+  outline: none; /* Remove outline on focus */
+  /* Remove default border-radius to blend with container */
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* Ensure invalid input styling works on the container */
+.phone-input-container.invalid-input {
+  border-color: red !important;
+}
+
+/* Ensure valid/focused input styling works on the container */
+.phone-input-container:not(.invalid-input):focus-within {
+  border-color: #28a745 !important; /* Green color for valid/focused input */
 }
 

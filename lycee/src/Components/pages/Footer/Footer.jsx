@@ -52,7 +52,7 @@ const Footer = () => {
             <Link to="/contact">Contact Lycee</Link>
             <Link to="/privacy">Privacy</Link>
             <Link to="/terms">Terms of Use</Link>
-            <button>Site Login</button>
+            <Link to="/signin">Site Login</Link>
           </div>
           <p>© 2024 Lycee Saint Alexandre Sauli Muhura</p>
         </div>

@@ -14,6 +14,7 @@ import ChatAssistant from './Components/pages/Chatbot/ChatbotInterface';
 import Inspiration from './Components/pages/Inspiration/Inspiration';
 import HomepageContainer from './Components/pages/HomepageContainer/HomepageContainer';
 import NewsEvents from './Components/pages/NewsEvents/NewsEvents';
+import Signin from './Authentication/signin';
 
 function App() {
   return (
@@ -24,30 +25,34 @@ function App() {
       {/* Main Navigation */}
       <Menu />
 
-      {/* Routes */}
-      <Routes>
-        <Route path="/" element={
-          <>
-            <HomepageContainer />
-            <Home />
-          </>
-        } />
-        <Route path="/about" element={<About />} />
-        <Route path="/VisionValues" element={<VisionValues />} />
-        <Route path="/Inspiration" element={<Inspiration />} />
-        <Route path="/DioceseByumba" element={<DioceseByumba />} />
-        <Route path="/contacts" element={<Contacts />} />
-        <Route path="/Babyeyi" element={<Babyeyi />} />
-        <Route path="/academics/*" element={<Home />} />
-        <Route path="/newsEvents" element={<NewsEvents />} />
-        <Route path="/arts" element={<Home />} />
-        <Route path="/students/*" element={<Home />} />
-        <Route path="/athletics" element={<Home />} />
-      </Routes>
+      {/* Main Content Area */}
+      <div className="main-content-area">
+        {/* Routes */}
+        <Routes>
+          <Route path="/" element={
+            <>
+              <HomepageContainer />
+              <Home />
+            </>
+          } />
+          <Route path="/about" element={<About />} />
+          <Route path="/VisionValues" element={<VisionValues />} />
+          <Route path="/Inspiration" element={<Inspiration />} />
+          <Route path="/DioceseByumba" element={<DioceseByumba />} />
+          <Route path="/contacts" element={<Contacts />} />
+          <Route path="/Babyeyi" element={<Babyeyi />} />
+          <Route path="/academics/*" element={<Home />} />
+          <Route path="/newsEvents" element={<NewsEvents />} />
+          <Route path="/arts" element={<Home />} />
+          <Route path="/students/*" element={<Home />} />
+          <Route path="/athletics" element={<Home />} />
+          <Route path="/signin" element={<Signin />} />
+        </Routes>
 
-      <ChatAssistant />
-      {/* Footer Navigation */}
-      <Footer />
+        <ChatAssistant />
+        {/* Footer Navigation */}
+        <Footer />
+      </div>
     </div>
   );
 }
