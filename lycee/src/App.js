@@ -1,0 +1,79 @@
+import React from 'react';
+import './App.css';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import Home from './Components/pages/Home/Home';
+import About from './Components/pages/About/About';
+import Contacts from './Components/pages/Contacts/Contacts';
+import Footer from './Components/pages/Footer/Footer';
+import Top from './Components/pages/Top/Top';
+import NavigationMenu from './Components/pages/Menu/Menu';
+import Babyeyi from './Components/pages/Babyeyi/Babyeyi';
+import DioceseByumba from './Components/pages/DioceseByumba/DioceseByumba';
+import VisionValues from './Components/pages/VisionValues/VisionValues';
+import ChatAssistant from './Components/pages/Chatbot/ChatbotInterface';
+import Inspiration from './Components/pages/Inspiration/Inspiration';
+import HomepageContainer from './Components/pages/HomepageContainer/HomepageContainer';
+import NewsEvents from './Components/pages/NewsEvents/NewsEvents';
+import Signin from './Authentication/signin';
+import DashboardLayout from './Components/pages/Dashboard/DashboardLayout';
+import TailwindTest from './TailwindTest';
+import ProtectedRoute from './Components/auth/ProtectedRoute';
+
+function App() {
+  const location = useLocation();
+  const isDashboard = location.pathname.startsWith('/dashboard');
+  return (
+    <div className="App">
+      {!isDashboard && (
+        <>
+          {/* Top Navigation Start */}
+          <Top />
+          {/* Main Navigation */}
+          <NavigationMenu />
+        </>
+      )}
+
+      {/* Main Content Area */}
+      <div className="main-content-area">
+      {/* Routes */}
+      <Routes>
+        <Route path="/" element={
+          <>
+            <HomepageContainer />
+            <Home />
+          </>
+        } />
+        <Route path="/about" element={<About />} />
+        <Route path="/VisionValues" element={<VisionValues />} />
+        <Route path="/Inspiration" element={<Inspiration />} />
+        <Route path="/DioceseByumba" element={<DioceseByumba />} />
+        <Route path="/contacts" element={<Contacts />} />
+        <Route path="/babyeyi" element={<Babyeyi />} />
+        <Route path="/academics/*" element={<Home />} />
+        <Route path="/newsEvents" element={<NewsEvents />} />
+        <Route path="/arts" element={<Home />} />
+        <Route path="/students/*" element={<Home />} />
+        <Route path="/athletics" element={<Home />} />
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <DashboardLayout />
+          </ProtectedRoute>
+        } />
+        <Route path="/tailwind-test" element={<TailwindTest />} />
+
+      </Routes>
+
+      {!isDashboard && (
+        <>
+          <ChatAssistant />
+          {/* Footer Navigation */}
+          <Footer />
+        </>
+      )}
+      </div>
+    </div>
+  );
+}
+
+export default App;

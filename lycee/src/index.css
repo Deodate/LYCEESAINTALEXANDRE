@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Times+New+Roman:wght@400..700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    margin: 0;
+    font-family: 'Times New Roman', Times, serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  code {
+    font-family: 'Times New Roman', Times, serif;
+  }
+}

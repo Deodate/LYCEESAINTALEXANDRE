@@ -1,0 +1,1760 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+ .App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+/* Base navbar styles - Simple approach */
+.main-navbar {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e9ecef;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-top: 40px;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+}
+
+.nav-brand a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.navbar-logo {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
+
+/* Logo size reduction */
+.navbar-brand img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/* Ensure navbar brand has proper spacing */
+.navbar-brand {
+  padding: 0.5rem 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Navigation menu - Simple approach */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  color: #1976D2 !important;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.5rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  white-space: nowrap;
+}
+
+.nav-link a {
+  color: #1976D2 !important;
+  text-decoration: none;
+}
+
+.nav-menu a {
+  color: #1976D2 !important;
+  text-decoration: none;
+}
+
+/* React Router Link specific styling */
+.nav-menu a[href] {
+  color: #1976D2 !important;
+  text-decoration: none;
+}
+
+.nav-menu a[href]:hover {
+  color: #1565C0 !important;
+  text-decoration: underline;
+  text-decoration-color: #1976D2;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.nav-link:hover {
+  color: #1565C0 !important;
+  background: transparent;
+  text-decoration: underline;
+  text-decoration-color: #1976D2;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.nav-link:hover a {
+  color: #1565C0 !important;
+}
+
+.nav-menu a:hover {
+  color: #1565C0 !important;
+  text-decoration: underline;
+  text-decoration-color: #1976D2;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #1976D2;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+
+
+/* Message link styling */
+.message-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.message-icon {
+  color: #1976D2;
+}
+
+.message-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #dc3545;
+  color: white;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 50%;
+  min-width: 18px;
+  text-align: center;
+}
+
+/* Search link styling */
+.search-link {
+  display: flex;
+  align-items: center;
+  color: #1976D2;
+}
+
+/* BABYEYI button styling */
+.babyeyi-button {
+  margin-left: 0.5rem;
+}
+
+.babyeyi-button .btn {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: #000;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.babyeyi-button .btn:hover {
+  background-color: #e0a800;
+  border-color: #e0a800;
+  color: #000;
+}
+
+/* Responsive navigation - Simple approach */
+@media (max-width: 991px) {
+  .nav-toggle {
+    display: block;
+  }
+  
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-top: 1px solid #e9ecef;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-menu-open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .nav-link {
+    padding: 0.75rem 0;
+    width: 100%;
+    border-bottom: 1px solid #f0f0f0;
+    justify-content: flex-start;
+  }
+  
+  .nav-link:last-child {
+    border-bottom: none;
+  }
+  
+  .message-link {
+    justify-content: flex-start;
+  }
+  
+  .babyeyi-button {
+    margin-left: 0;
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+  
+  .babyeyi-button .btn {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .school-name {
+    font-size: 1rem;
+  }
+}
+
+.btn-warning{
+  margin-top: 21px;
+}
+
+/* Top navigation styles */
+.top-nav {
+  background-color: #304a9a;
+  padding: 0.5rem 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.top-nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0 1rem;
+}
+
+.top-nav a:hover {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+}
+
+.left-nav-links {
+  padding-left: 5px;
+}
+
+.right-nav-links {
+  padding-right: 5px;
+}
+
+/* Override Bootstrap container padding */
+.container-fluid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* For mobile responsiveness */
+@media (max-width: 768px) {
+  .top-nav a {
+    font-size: 0.8rem;
+    padding: 0 0.5rem;
+  }
+}
+
+/* Redirect message styling */
+.redirect-message {
+  background-color: #fff3cd;
+  border: 1px solid #ffeaa7;
+  color: #856404;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 14px;
+}
+
+@media (max-width: 480px) {
+  .top-nav a {
+    font-size: 0.7rem;
+    padding: 0 0.25rem;
+  }
+}
+/* Main navigation styles */
+.navbar-nav .nav-link,
+.navbar-nav .dropdown-toggle {
+  position: relative;
+  padding: 1rem 0.75rem;
+  color: #304a9a;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+/* Ensure navbar collapse is visible */
+.navbar-collapse {
+  display: flex;
+  flex-basis: 100%;
+  flex-grow: 1;
+  align-items: center;
+}
+
+/* Ensure nav items are visible */
+.navbar-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure individual nav items are visible */
+.navbar-nav .nav-item {
+  display: block;
+  margin: 0 0.5rem;
+}
+
+/* Ensure nav links are visible and properly styled */
+.navbar-nav .nav-link {
+  display: block;
+  color: #304a9a;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  background-color: transparent;
+  border: none;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #1a365d;
+  background-color: transparent;
+}
+
+/* Ensure dropdown is visible */
+.navbar-nav .dropdown {
+  display: block;
+}
+
+.navbar-nav .dropdown-toggle {
+  display: block;
+  color: #304a9a;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  background-color: transparent;
+  border: none;
+}
+
+/* Ensure the button styling for BABYEYI */
+.btn-warning {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: #000;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0 0.5rem;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+  border-color: #d39e00;
+  color: #000;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 991px) {
+  .navbar-nav .nav-link,
+  .navbar-nav .dropdown-toggle {
+    padding: 0.5rem 1rem !important;
+  }
+
+  .dropdown-menu {
+    padding: 0;
+    margin: 0;
+    background-color: #304a9a !important;
+  }
+
+  .dropdown-item {
+    padding: 0.5rem 1rem !important;
+    color: white !important;
+  }
+
+  /* Adjust the toggle button spacing */
+  .navbar-toggler {
+    margin: 0.5rem 0;
+  }
+
+  /* Remove extra padding from collapsed navbar */
+  .navbar-collapse {
+    padding: 0;
+  }
+
+  /* Adjust dropdown items spacing */
+  .nav-item {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .nav-item:last-child {
+    border-bottom: none;
+  }
+}
+
+/* Underline effect for nav items - desktop only */
+@media (min-width: 992px) {
+  .navbar-nav .nav-link::after,
+  .navbar-nav .dropdown-toggle::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #304a9a;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .navbar-nav .nav-link:hover::after,
+  .navbar-nav .dropdown-toggle:hover::after,
+  .navbar-nav .nav-link.active::after,
+  .navbar-nav .dropdown-toggle.show::after {
+    transform: scaleX(1);
+  }
+}
+
+/* Dropdown menu styles */
+.navbar-nav .dropdown-menu,
+.nav-item .dropdown-menu {
+  margin-top: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background-color: #304a9a !important;
+  padding: 0;
+}
+
+.navbar-nav .dropdown-menu .dropdown-item,
+.nav-item .dropdown-menu .dropdown-item {
+  color: white !important;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+}
+
+.navbar-nav .dropdown-menu .dropdown-item:hover,
+.nav-item .dropdown-menu .dropdown-item:hover {
+  background-color: #304a9a !important;
+  color: white !important;
+}
+
+/* Search link styles */
+.search-link {
+  font-size: 1.2rem;
+}
+
+@media (max-width: 991px) {
+  .search-link {
+    padding: 0.5rem 1rem !important;
+  }
+}
+
+/* Remove arrow from search link */
+.search-link::after {
+  display: none !important;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Footer container */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Footer container */
+footer {
+  background-color: #304a9a;
+  color: white;
+  padding: 2rem 1rem;
+  font-family: "Times New Roman", Times, serif;
+  bottom: 0;
+  width: 100%;
+  /* z-index: 1000; */
+  margin-top: auto;
+}
+
+.main-content {
+  flex: 1;
+}
+
+/* Rest of your existing footer styles */
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .footer-content {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .main-content {
+    margin-bottom: 300px; /* Smaller margin for desktop */
+  }
+}
+
+/* Your existing footer styles continue unchanged... */
+.footer-section h1 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.footer-section h2 {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.footer-section p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-section a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-section a:hover {
+  text-decoration: underline;
+}
+
+.contact-button {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid white;
+  border-radius: 999px;
+  margin-top: 1rem;
+}
+
+.contact-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.social-links li:hover{
+  fill: #d1d8fb;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.5rem;
+  margin-left: 60px;
+}
+
+/* Social media icon styles */
+.social-links .bi-instagram {
+  background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.5rem;
+}
+
+.social-links .bi-youtube {
+  color: #FF0000;
+  font-size: 1.5rem;
+}
+
+/* Ensure proper hover effects */
+.social-links a:hover .bi-instagram,
+.social-links a:hover .bi-youtube {
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+/* Adjust icon spacing */
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0.5rem;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 1.5rem;
+  margin-top: 1rem;
+}
+
+.footer-bottom-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-bottom-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-bottom a,
+.footer-bottom button {
+  color: white;
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.footer-bottom a:hover,
+.footer-bottom button:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .footer-bottom-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  
+  .footer-bottom-links {
+    justify-content: center;
+  }
+}
+
+/* For extra small devices */
+@media (max-width: 480px) {
+  .main-content {
+    margin-bottom: 200px;
+  }
+
+  footer {
+    padding: 0.75rem 0.25rem;
+    font-size: 0.85rem;
+  }
+
+  .footer-section h1 {
+    font-size: 1.1rem;
+  }
+
+  .social-links {
+    font-size: 1rem;
+  }
+}
+
+/* Homepage banner styles */
+.homepage-banner {
+  width: 100%;
+  position: flex;
+  justify-content: center;
+  padding: 10px 15px;
+}
+
+.banner-container {
+  width: 100%;
+  height: 355px; /* Adjust this value to your preferred height */
+  overflow: hidden;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Optional hover effect */
+.banner-image:hover {
+  transform: scale(1.02);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .banner-container {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-container {
+    height: 200px; /* Even smaller for very small devices */
+  }
+}
+
+.Welcome-title {
+  text-align: center;
+  color: #304a9a;
+  font-size: 2.9rem;
+  margin: 1.5rem 0;
+  font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .welcome-title {
+    font-size: 2rem;
+    margin: 1rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-title {
+    font-size: 1.75rem;
+    margin: 0.75rem 0;
+  }
+}
+
+.welcome-section {
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.Welcome-text {
+  font-size: 1.35rem;
+  line-height: 1.6;
+  color: #060606;
+  margin: 1rem auto;
+  max-width: 900px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .welcome-title {
+    font-size: 2rem;
+    margin: 1rem 0;
+  }
+  
+  .welcome-text {
+    font-size: 1.1rem;
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-title {
+    font-size: 1.75rem;
+    margin: 0.75rem 0;
+  }
+  
+  .welcome-text {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+}
+
+/* Excellence-section */
+
+.excellence-section {
+  margin: 4rem 0;
+}
+
+.excellence-image {
+  width: 100%;
+  height: 100%;
+  padding: 14px;
+  object-fit: cover;
+}
+
+.excellence-content {
+  padding: 3rem 15px; 
+}
+
+.excellence-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.green-line {
+  width: 50px;
+  height: 4px;
+  background-color: #1B5E20;
+  margin: 1.5rem 0;
+}
+
+.green-line-trans {
+  width: 50px;
+  height: 3px;
+  background-color: #1B5E20;
+  margin: 0.5rem 0 1rem 0; /* Reduce top margin to bring it closer to title */
+}
+
+.excellence-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.program-link {
+  padding: 10px 10px;
+  text-decoration: none;
+  color: #000;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.program-link:hover {
+  color: #1B5E20;
+  text-decoration: none;
+}
+
+.arrow {
+  font-size: 1.2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+  .excellence-content {
+    padding: 2rem 15px; /* Changed to maintain consistent 15px padding */
+  }
+  
+  .excellence-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .excellence-content {
+    padding: 2rem 15px; /* Changed to maintain consistent 15px padding */
+  }
+  
+  .excellence-title {
+    font-size: 1.75rem;
+  }
+  
+  .program-link {
+    font-size: 1rem;
+  }
+}
+
+/* Impact Style */
+
+.numbers-section {
+  background-color:  #304a9a;
+  color: white;
+  overflow: hidden;
+  position: relative;
+}
+
+.numbers-content {
+  padding: 4rem 2rem;
+}
+
+.impact-subtitle {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.numbers-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.white-line {
+  width: 50px;
+  height: 4px;
+  background-color: white;
+  margin: 1.5rem 0 3rem 0;
+}
+
+.statistics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.statistic-item {
+  margin-bottom: 2rem;
+}
+
+.statistic-number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color:  #b1bdf8;
+}
+
+.statistic-label {
+  font-size: 1rem;
+  line-height: 1.4;
+  color: white;
+}
+
+.numbers-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 400px;
+}
+
+@media (max-width: 991px) {
+  .numbers-content {
+    padding: 3rem 1.5rem;
+  }
+  
+  .statistics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.nav-dots{
+  top: 10px;
+  width: 20px;
+}
+
+.nav-dots {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  left: auto;
+  z-index: 10;
+}
+
+.nav-dots-svg {
+  width: 10%;
+  height: auto;
+  opacity: 0.9;
+}
+
+@media (max-width: 767px) {
+  .statistics-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .numbers-title {
+    font-size: 2.5rem;
+  }
+  
+  .statistic-number {
+    font-size: 2rem;
+  }
+}
+
+/* Transform Style */
+.program-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.program-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  color: #333;
+  text-decoration: none;
+  border-bottom: 1px solid #eee;
+  transition: all 0.3s ease;
+  font-size: 4px;
+  font-weight: 400;
+}
+
+.program-link:hover {
+  color: #333;
+  background-color: #f8f9fa;
+}
+
+.program-link .arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.program-link:hover .arrow {
+  background-color: #e0e0e0;
+  transform: translateX(5px);
+}
+
+/* Transform Links (similar styling) */ 
+
+.transform-title {
+  margin-bottom: 0.5rem; /* Reduce bottom margin of title */
+}
+
+.transform-image {
+  width: 95%;
+  /* height: 50%; */
+  padding: 14px;
+  object-fit: cover;
+}
+
+.transform-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.transform-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px;
+  color: #333;
+  text-decoration: none;
+  border-bottom: 1px solid #eee;
+  transition: all 0.3s ease;
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+.transform-link:hover {
+  color: #333;
+  background-color: #f8f9fa;
+}
+
+.transform-link .arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.transform-link:hover .arrow {
+  background-color: #e0e0e0;
+  transform: translateX(5px);
+}
+
+@media (max-width: 768px) {
+  .program-link,
+  .transform-link {
+    padding: 2px;
+    font-size: 1.1rem;
+  }
+  
+  .program-link .arrow,
+  .transform-link .arrow {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+.transform-description {
+  margin: 0 18px 0 0;  /* Add 10px margin to the right */
+  padding: 10px 0;  /* Add some vertical padding */
+  white-space: normal;  /* Allow text to wrap naturally */
+  text-align: left;  /* Align text to the left */
+  line-height: 1.6;  /* Maintain readable line height */
+  color: #333;
+}
+
+/* News Section */
+
+.news-section {
+  padding: 2rem 1rem; /* Smaller padding on mobile */
+  background-color: #fff;
+}
+
+@media (min-width: 768px) {
+  .news-section {
+    padding: 4rem 0;
+  }
+}
+
+.news-title {
+  font-size: 2rem; /* Smaller font size on mobile */
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .news-title {
+    font-size: 2.5rem;
+  }
+}
+
+.news-description {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 2rem; /* Add space before news cards on mobile */
+}
+
+.news-card {
+  display: block;
+  color: inherit;
+  transition: transform 0.3s ease;
+  margin-bottom: 2rem; /* Add space between cards on mobile */
+}
+
+@media (min-width: 768px) {
+  .news-card {
+    margin-bottom: 0;
+  }
+}
+
+/* Disable hover effect on touch devices */
+@media (hover: hover) {
+  .news-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .news-card:hover .news-card-title {
+    color: #198754;
+  }
+}
+
+.news-image-wrapper {
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.news-image-wrapper img {
+  width: 100%;
+  height: 200px; /* Fixed height for consistency on mobile */
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .news-image-wrapper img {
+    height: 220px; /* Slightly taller on desktop */
+  }
+}
+
+.news-card-title {
+  color: #333;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0;
+  font-size: 1.125rem; /* Slightly smaller on mobile */
+  transition: color 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .news-card-title {
+    font-size: 1.25rem;
+  }
+}
+
+.news-category, .news-date {
+  font-size: 0.875rem;
+}
+
+/* Add spacing between meta items on very small screens */
+@media (max-width: 360px) {
+  .news-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .news-meta .separator {
+    display: none;
+  }
+}
+
+/* Fix container padding on small screens */
+@media (max-width: 767px) {
+  .news-section .container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+/* Video */
+
+.video-section {
+  background-color: #304a9a;
+  padding: 2rem 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.content-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.text-content {
+  flex: 1;
+  color: white;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.image-content {
+  flex: 1;
+}
+
+.image-content img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+  
+  .image-content img {
+    max-width: 100%;
+  }
+}
+.icon-number {
+  font-size: 10px; 
+  font-weight: bold;
+  color: rgb(8, 7, 7);
+  pointer-events: none;
+  margin-right: 2px;
+}
+
+/* pdf view css */
+
+.pdf-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.pdf-viewer {
+  width: 100%;
+  height: 800px;
+  border: 3px solid #f40909;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 768px) {
+  .pdf-container {
+      padding: 10px;
+  }
+
+  .pdf-viewer {
+      height: 600px;
+  }
+}
+
+/* Styles for the main content area below the fixed header */
+.main-content-area {
+  margin-top: 20px; /* Reduced space for cleaner layout */
+}
+
+/* Styling for the Signin page card */
+.signin-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Changed from center to flex-start */
+  /* min-height: calc(100vh - 50px); // Adjust height considering the fixed header */
+  padding: 20px;
+  padding-top: 50px; /* Add 50px padding at the top */
+}
+
+.auth-card {
+  background-color: #fff;
+  border-radius: 8px; /* Added border-radius back for the card */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-width: 400px; /* Adjusted max-width for the form appearance */
+  width: 100%;
+}
+
+.auth-card-header {
+  background-color: #304a9a; /* Footer color */
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 15px 20px;
+  text-align: center; /* Changed from left to center */
+}
+
+.auth-card-body {
+  padding: 20px;
+  text-align: center; /* Center align body content */
+  line-height: 1.6;
+  color: #333;
+}
+
+.auth-card-body h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #000; /* Ensure title is black */
+}
+
+.auth-tabs {
+  display: flex;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.auth-tab.active {
+  background-color: #304a9a; /* Footer color for active tab */
+  color: white;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 9.5px 12px; /* Reverted to previous padding */
+  margin-bottom: 10px;
+  border: 1px solid #e0e0e0; /* Reverted to previous border */
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 12px 15px; /* Keep the desired padding for select */
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Styling for select dropdown to match input fields */
+.form-input-style {
+  width: 100%;
+  padding: 9.5px 12px; /* Match input padding */
+  border: 1px solid #e0e0e0;
+  border-radius: 4px; /* Match input border-radius */
+  font-size: 1rem;
+  /* Add some appearance reset for consistency */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #fff; /* Ensure background is white */
+  cursor: pointer;
+}
+
+.forgot-password {
+  display: block;
+  text-align: right;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  color: #007bff; /* Blue color for links */
+  text-decoration: none;
+}
+
+.login-button {
+  /* width: 100%; Removed full width */
+  padding: 5px 12px; /* Reduced vertical padding */
+  background-color: #3020fa; /* Changed to the requested color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 1; /* Allow buttons to grow and shrink */
+  margin: 0 5px; /* Add horizontal margin */
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+}
+
+/* Styling for the Cancel button */
+.cancel-button {
+  /* width: 100%; Removed full width */
+  padding: 5px 12px; /* Reduced vertical padding */
+  background-color: #dc3545; /* Red color for cancel button */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  /* margin-top: 10px; Removed top margin */
+  flex: 1; /* Allow buttons to grow and shrink */
+  margin: 0 5px; /* Add horizontal margin */
+}
+
+.cancel-button:hover {
+  background-color: #c82333;
+}
+
+/* Styling for the Signup submit button */
+.signup-submit-button {
+  padding: 5px 12px; /* Match login/cancel button padding */
+  background-color: #084203; /* Dark green color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 1; /* Match login/cancel button flex behavior */
+  margin: 0 5px; /* Match login/cancel button horizontal margin */
+}
+
+.signup-submit-button:hover {
+  background-color: #063102; /* Darker shade for hover */
+}
+
+/* Styling for the button group container */
+.auth-button-group {
+  display: flex; /* Use flexbox to align buttons in a row */
+  gap: 10px; /* Add space between buttons */
+  margin-top: 20px; /* Add some space above the button group */
+  padding: 0 20px; /* Add horizontal padding to reduce button width */
+}
+
+.signup-link {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.signup-link a {
+  color: #007bff; /* Blue color for links */
+  text-decoration: none;
+}
+
+/* Styling for invalid input fields */
+.invalid-input {
+  border-color: red !important; /* Turn border red when invalid */
+}
+
+/* Styling for valid/focused input fields */
+.form-group input:not(.invalid-input):focus,
+.form-group input:not(.invalid-input):not(:placeholder-shown),
+.form-input-style:not(.invalid-input):focus,
+.form-input-style:not(.invalid-input):not(:placeholder-shown) {
+  border-color: #28a745 !important; /* Green color for valid/focused input */
+}
+
+/* Styling for login form inputs when they have a value (and are not focused/invalid) */
+.auth-card-body form input:not(:placeholder-shown):not(:focus):not(.invalid-input) {
+  border-color: #28a745 !important; /* Green color for inputs with value */
+}
+
+/* Styles for phone number input with country code */
+.phone-input-container {
+  display: flex;
+  align-items: center;
+  width: 100%; /* Ensure it takes full width like other form groups */
+  border: 1px solid #e0e0e0; /* Apply border to the container */
+  border-radius: 4px; /* Apply border-radius to the container */
+  overflow: hidden; /* Hide overflowing borders */
+}
+
+.phone-input-container:focus-within {
+  border-color: #28a745 !important; /* Green border on focus */
+}
+
+.country-code-select {
+  padding: 9.5px 12px; /* Match vertical padding of input */
+  border: none; /* Remove border */
+  background-color: #f8f9fa; /* Slightly different background to distinguish */
+  font-size: 1rem;
+  cursor: pointer;
+  /* Remove default arrow and appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  text-align: center;
+  outline: none; /* Remove outline on focus */
+  border-right: 1px solid #e0e0e0; /* Add a subtle separator */
+}
+
+.country-code-select:focus {
+    border: none; /* Ensure no border on focus */
+    outline: none; /* Ensure no outline on focus */
+}
+
+.phone-input-container input[type="tel"] {
+  flex-grow: 1; /* Allow input to take remaining space */
+  padding: 9.5px 12px; /* Match padding */
+  border: none; /* Remove individual border */
+  border-radius: 0; /* Remove individual border-radius */
+  font-size: 1rem;
+  outline: none; /* Remove outline on focus */
+  /* Remove default border-radius to blend with container */
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* Ensure invalid input styling works on the container and overrides focus styles */
+.phone-input-container.invalid-input,
+.phone-input-container.invalid-input:focus-within {
+  border-color: red !important;
+  border-width: 1px !important; /* Ensure border width is set */
+  border-style: solid !important; /* Ensure border style is solid */
+}
+
+/* Ensure valid/focused input styling works on the container */
+.phone-input-container:not(.invalid-input):focus-within {
+  border-color: #28a745 !important; /* Green color for valid/focused input */
+}
+
+/* Success Message Styles */
+.success-message-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px; /* Adjust as needed for spacing from tabs */
+}
+
+.success-icon {
+  margin-bottom: 20px;
+  width: 80px; /* Set a fixed width for the circle */
+  height: 80px; /* Set a fixed height for the circle */
+  border: 4px solid #4CAF50; /* Green border for the circle */
+  border-radius: 50%; /* Make it circular */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-icon svg {
+  color: #4CAF50; /* Green color for the checkmark */
+}
+
+.success-title {
+  color: #4CAF50; /* Green color for "Oh Yeah!" */
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.success-text {
+  color: #555;
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.success-ok-button {
+  background-color: #4CAF50; /* Green button */
+  color: white;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.success-ok-button:hover {
+  background-color: #45a049;
+}
+
+/* Added style for red text */
+.red-text {
+  color: red;
+}
+
+/* Error Message Styles */
+.error-message-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px; /* Adjust as needed for spacing from tabs */
+}
+
+.error-icon {
+  margin-bottom: 20px;
+  width: 80px; /* Same size as success icon circle */
+  height: 80px; /* Same size as success icon circle */
+  border: 4px solid #D32F2F; /* Red border for the circle */
+  border-radius: 50%; /* Make it circular */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-icon svg {
+  color: #D32F2F; /* Red color for the cross mark */
+}
+
+.error-title {
+  color: #D32F2F; /* Red color for "Invalid email!" */
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.error-text {
+  color: #555;
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.error-ok-button {
+  background-color: #D32F2F; /* Red button */
+  color: white;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.error-ok-button:hover {
+  background-color: #b71c1c;
+}
+
+/* Manual Login Notice Styles */
+.manual-login-notice {
+  background-color: #e3f2fd;
+  border: 1px solid #2196f3;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.manual-login-notice p {
+  margin: 0;
+  color: #1976d2;
+  font-size: 14px;
+  font-weight: 500;
+}
+

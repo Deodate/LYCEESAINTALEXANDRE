@@ -1,0 +1,274 @@
+/* Chat container, positioning */
+.chat-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+/* Button to open/close the chat */
+.chat-toggle-btn {
+    width: 50px;
+    height: 50px;
+    background-color: #d0c419;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Chat window styles */
+.chat-window {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+    height: 400px; /* Fixed height for the chat window */
+    background-color: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent content overflow outside the chat window */
+}
+
+/* Header section styling */
+.chat-header {
+    background-color: #304a9a;
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chat-header h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #fff;
+}
+
+/* Close button in the header */
+.close-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 16px;
+}
+
+/* Chat content section */
+.chat-content {
+    padding: 20px;
+    flex: 1;
+    overflow-y: auto; /* Enable vertical scrolling */
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100% - 80px); /* Deduct space for header/footer */
+    padding-bottom: 60px; /* Add space for input section */
+    background-color: #008080; /* Teal color from the provided image */
+}
+
+/* Message and options styling */
+.chat-content p {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.question {
+    font-weight: bold;
+}
+
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Button styling for options */
+.option-btn {
+    background-color: #fff;
+    border: 1px solid #a52a2a;
+    color: #a52a2a;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Footer section for input */
+.chat-footer {
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    background-color: #f9f9f9;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.input-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Changed from 20px to 5px for a more rectangular shape */
+    padding: 5px 15px;
+    margin-right: 10px;
+}
+
+/* Input field styling */
+.input-field {
+    flex: 1;
+    border: none; /* Remove default input border */
+    outline: none; /* Remove outline on focus */
+    padding: 5px 0;
+    font-size: 14px;
+    background-color: transparent; /* Ensure input background is transparent */
+}
+
+.input-icons {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between icons */
+    margin-left: 10px; /* Space between input text and icons */
+}
+
+.icon-paperclip, .icon-emoji {
+    color: #666; /* Adjust icon color */
+    cursor: pointer;
+    font-size: 18px; /* Adjust icon size */
+}
+
+/* Send button styling */
+.send-btn {
+    background-color: #4051fa;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px; /* Reduced padding for smaller height and width */
+    cursor: pointer;
+    font-size: 14px;
+    min-width: 60px; /* Adjusted min-width for the smaller size */
+}
+
+/* Styling for message bubbles */
+.message {
+    display: flex;
+    margin: 10px 0;
+    align-items: flex-start; /* Align items to the top */
+    position: relative;
+}
+
+/* Align receiver (user) messages to the left */
+.message.receiver-message {
+    justify-content: flex-start;
+}
+
+/* Align sender (bot) messages to the right */
+.message.sender-message {
+    justify-content: flex-end;
+}
+
+/* Receiver message bubble (User) */
+.receiver {
+    background-color: #dcf8c6; /* Light green, common for user messages */
+    border-radius: 15px 15px 15px 4px; /* Rounded corners with a flatter bottom-left */
+    padding: 10px;
+    max-width: 220px; /* Adjusted max-width for better spacing */
+    margin: 0;
+    position: relative;
+}
+
+/* Sender message bubble (School/Bot) */
+.sender {
+    background-color: #e9e9eb; /* Light grey */
+    border-radius: 15px 15px 4px 15px; /* Rounded corners with a flatter bottom-right */
+    padding: 10px;
+    max-width: 220px; /* Adjusted max-width for better spacing */
+    margin: 0;
+    position: relative;
+}
+
+/* Tail for sender message bubble */
+.sender::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: -7px; /* Position the tail on the right */
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #e9e9eb; /* Match background color */
+}
+
+/* Tail for receiver message bubble */
+.receiver::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -7px; /* Position the tail on the left */
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #dcf8c6; /* Match background color */
+}
+
+/* Icon container for sender (school) */
+.message.sender-message .icon-container {
+    order: 2; /* Place icon on the right */
+    margin-left: 10px; /* Space between icon and message bubble */
+    margin-right: 0; /* Ensure no extra right margin */
+}
+
+/* Icon container for receiver (user) */
+.message.receiver-message .icon-container {
+    order: 1; /* Place icon on the left */
+    margin-left: 0; /* Ensure no extra left margin */
+    margin-right: 5px; /* Set space between icon and message bubble to 5px */
+}
+
+/* Styling for icons */
+.message .icon-container img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Error styling for validation messages */
+.sender.error, .receiver.error {
+    color: #b00020; /* red */
+}
+
+/* Success styling for confirmation messages */
+.sender.success, .receiver.success {
+    color: #0f9d58; /* green */
+}
+
+/* Styling for the user profile icon (reverted version) */
+.user-profile-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Ensure proper spacing for receiver messages */
+.message.receiver-message .receiver {
+    order: 2; /* Ensure the bubble comes after the icon */
+    margin-left: 20px; /* Explicitly add space after the icon, adjust as needed */
+    margin-right: 0; /* Ensure no conflicting right margin */
+}
