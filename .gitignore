@@ -1,2 +1,5 @@
 Dashboard/node_modules/
 Backend/target/
+.venv/
+__pycache__/
+*.pyc
