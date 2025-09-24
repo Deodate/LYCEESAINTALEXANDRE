@@ -3,21 +3,96 @@ import { Menu, LogOut, ChevronDown, Bell } from 'lucide-react';
 import logo from '../../../assets/images/logo-black.png';
 import StaffManagement from '../Authentications/StaffManagement';
 import BabyeyiLetter from '../Babyeyi/BabyeyiLetter';
-import Comments from '../Authentications/comments';
+import AIChat from '../AIChat/AIChat';
 import GalleryManagement from '../Authentications/gallery';
 import NewsEventsManagement from '../Authentications/newsEvents';
 import { Link } from 'react-router-dom';
 import StudentList from '../Authentications/studentsList';
 import DioceseByumba from '../DioceseByumba/DioceseByumba';
 import { useNavigate } from 'react-router-dom';
+import { useNotifications } from '../../../context/NotificationContext';
 import './Dashboard.css';
 
 const DashboardLayout = () => {
   const [activeMenu, setActiveMenu] = useState('');
   const [isNavExpanded, setIsNavExpanded] = useState(true);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [notificationCount, setNotificationCount] = useState(5);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const { unreadCount, setTotalUnreadCount } = useNotifications();
+  
+  // Debug effect to log unread count changes
+  useEffect(() => {
+    console.log(`🔔 Dashboard: Unread count changed to ${unreadCount}`);
+  }, [unreadCount]);
+
+  // Debug effect to show current state
+  useEffect(() => {
+    console.log(`🔔 Dashboard: Current state - unreadCount: ${unreadCount}`);
+    const savedReadConversations = localStorage.getItem('readConversations');
+    console.log(`🔔 Dashboard: localStorage readConversations:`, savedReadConversations);
+  }, [unreadCount]);
+
+  // Fetch unread count when Dashboard loads and refresh periodically
+  useEffect(() => {
+    const fetchUnreadCount = async () => {
+      try {
+        // Fetch all conversations to get total count
+        const response = await fetch('http://localhost:9090/api/v1/chat-conversation/all?page=0&size=1000');
+        if (response.ok) {
+          const data = await response.json();
+          console.log('🔔 Dashboard: API Response:', data);
+          
+          let totalConversations = 0;
+          
+          // Handle paginated response format
+          if (data.data && data.data.content && Array.isArray(data.data.content)) {
+            totalConversations = data.data.totalElements || data.data.content.length;
+            console.log(`🔔 Dashboard: Found ${totalConversations} total conversations (paginated format)`);
+          } 
+          // Handle flat array format (fallback)
+          else if (data.data && Array.isArray(data.data)) {
+            totalConversations = data.data.length;
+            console.log(`🔔 Dashboard: Found ${totalConversations} total conversations (flat format)`);
+          }
+          
+          if (totalConversations > 0) {
+            // Get read conversations from localStorage
+            const savedReadConversations = localStorage.getItem('readConversations');
+            let readCount = 0;
+            
+            if (savedReadConversations) {
+              try {
+                const readIds = JSON.parse(savedReadConversations);
+                readCount = readIds.length;
+                console.log(`🔔 Dashboard: Found ${readCount} read conversations in localStorage`);
+              } catch (error) {
+                console.error('Error parsing read conversations:', error);
+              }
+            }
+            
+            // Calculate unread count
+            const unreadCount = Math.max(0, totalConversations - readCount);
+            setTotalUnreadCount(unreadCount);
+            console.log(`🔔 Dashboard: Calculated unread count: ${unreadCount} (${totalConversations} total - ${readCount} read)`);
+          } else {
+            console.log('🔔 Dashboard: No conversations found, setting unread count to 0');
+            setTotalUnreadCount(0);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching unread count:', error);
+      }
+    };
+
+    // Initial fetch
+    fetchUnreadCount();
+
+    // Set up periodic refresh every 30 seconds
+    const interval = setInterval(fetchUnreadCount, 30000);
+
+    // Cleanup interval on unmount
+    return () => clearInterval(interval);
+  }, [setTotalUnreadCount]);
   const [userInfo, setUserInfo] = useState({
     firstName: '',
     lastName: '',
@@ -153,10 +228,54 @@ const DashboardLayout = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Example function to demonstrate use of setNotificationCount
-  const updateNotifications = () => {
-    // Simulate updating notification count, e.g., after reading notifications
-    setNotificationCount(prevCount => Math.max(0, prevCount - 1));
+  // Handle notification bell click
+  const handleNotificationClick = () => {
+    // Refresh unread count before navigating
+    const refreshUnreadCount = async () => {
+      try {
+        const response = await fetch('http://localhost:9090/api/v1/chat-conversation/all?page=0&size=1000');
+        if (response.ok) {
+          const data = await response.json();
+          console.log('🔔 Dashboard: Refresh API Response:', data);
+          
+          let totalConversations = 0;
+          
+          // Handle paginated response format
+          if (data.data && data.data.content && Array.isArray(data.data.content)) {
+            totalConversations = data.data.totalElements || data.data.content.length;
+          } 
+          // Handle flat array format (fallback)
+          else if (data.data && Array.isArray(data.data)) {
+            totalConversations = data.data.length;
+          }
+          
+          if (totalConversations > 0) {
+            const savedReadConversations = localStorage.getItem('readConversations');
+            let readCount = 0;
+            
+            if (savedReadConversations) {
+              try {
+                const readIds = JSON.parse(savedReadConversations);
+                readCount = readIds.length;
+              } catch (error) {
+                console.error('Error parsing read conversations:', error);
+              }
+            }
+            
+            const unreadCount = Math.max(0, totalConversations - readCount);
+            setTotalUnreadCount(unreadCount);
+            console.log(`🔔 Dashboard: Refreshed unread count: ${unreadCount}`);
+          }
+        }
+      } catch (error) {
+        console.error('Error refreshing unread count:', error);
+      }
+    };
+    
+    refreshUnreadCount();
+    
+    // Navigate to AI Chat when notification is clicked
+    setActiveMenu('comments');
   };
 
   return (
@@ -192,10 +311,10 @@ const DashboardLayout = () => {
           </Link>
 
           {/* Notification Icon */}
-          <div className="notification-bell" onClick={updateNotifications}>
+          <div className="notification-bell" onClick={handleNotificationClick}>
             <Bell size={20} />
-            {notificationCount > 0 && (
-              <span className="notification-badge">{notificationCount}</span>
+            {unreadCount > 0 && (
+              <span className="notification-badge">{unreadCount}</span>
             )}
           </div>
 
@@ -312,7 +431,7 @@ const DashboardLayout = () => {
         )}
 
         {activeMenu === 'comments' && (
-          <Comments />
+          <AIChat />
         )}
 
         {activeMenu === 'gallery' && (

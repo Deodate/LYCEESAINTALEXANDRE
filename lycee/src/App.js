@@ -18,12 +18,14 @@ import Signin from './Authentication/signin';
 import DashboardLayout from './Components/pages/Dashboard/DashboardLayout';
 import TailwindTest from './TailwindTest';
 import ProtectedRoute from './Components/auth/ProtectedRoute';
+import { NotificationProvider } from './context/NotificationContext';
 
 function App() {
   const location = useLocation();
   const isDashboard = location.pathname.startsWith('/dashboard');
   return (
-    <div className="App">
+    <NotificationProvider>
+      <div className="App">
       {!isDashboard && (
         <>
           {/* Top Navigation Start */}
@@ -73,6 +75,7 @@ function App() {
       )}
       </div>
     </div>
+    </NotificationProvider>
   );
 }
 

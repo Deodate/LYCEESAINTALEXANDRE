@@ -88,6 +88,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/auth/**").permitAll()
                         .requestMatchers("/api/v1/chat-inquiries/**").permitAll()
+                        .requestMatchers("/api/v1/chat-conversation/**").permitAll() // Allow chat conversation endpoints
                         .requestMatchers("/api/v1/chatbolt/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/babyeyi-pdf/**").permitAll() // Allow GET requests without authentication
                         .requestMatchers(HttpMethod.POST, "/api/babyeyi-pdf/**").authenticated() // Require authentication for POST
@@ -96,6 +97,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .anyRequest().authenticated()
                 )
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
                 .cors(Customizer.withDefaults()); // Apply CORS configuration
         return http.build();
     }

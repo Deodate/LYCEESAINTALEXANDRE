@@ -36,18 +36,21 @@
 
 /* Header section styling */
 .chat-header {
-    background-color: #304a9a;
+    background-color: #1e3a8a;
     color: #fff;
     padding: 15px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-radius: 8px 8px 0 0;
+    border-bottom: 2px solid #0ea5e9;
 }
 
 .chat-header h3 {
     margin: 0;
     font-size: 16px;
     color: #fff;
+    font-weight: 600;
 }
 
 /* Close button in the header */
@@ -57,6 +60,16 @@
     cursor: pointer;
     color: #fff;
     font-size: 16px;
+    transition: all 0.3s ease;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Chat content section */
@@ -91,21 +104,41 @@
 /* Button styling for options */
 .option-btn {
     background-color: #fff;
-    border: 1px solid #a52a2a;
-    color: #a52a2a;
-    padding: 10px;
-    border-radius: 5px;
+    border: 2px solid #d0c419;
+    color: #d0c419;
+    padding: 10px 15px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.option-btn:hover {
+    background-color: #d0c419;
+    color: #fff;
+}
+
+/* Typing animation */
+@keyframes typing {
+    0%, 20% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 /* Footer section for input */
 .chat-footer {
-    padding: 10px;
-    border-top: 1px solid #ddd;
+    padding: 12px;
+    border-top: 1px solid #e0e0e0;
     display: flex;
     align-items: center;
-    background-color: #f9f9f9;
+    background-color: #f8f9fa;
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -116,10 +149,11 @@
     display: flex;
     align-items: center;
     background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px; /* Changed from 20px to 5px for a more rectangular shape */
-    padding: 5px 15px;
-    margin-right: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-right: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* Input field styling */
@@ -127,9 +161,14 @@
     flex: 1;
     border: none; /* Remove default input border */
     outline: none; /* Remove outline on focus */
-    padding: 5px 0;
+    padding: 6px 0;
     font-size: 14px;
     background-color: transparent; /* Ensure input background is transparent */
+    color: #333;
+}
+
+.input-field::placeholder {
+    color: #999;
 }
 
 .input-icons {
@@ -140,21 +179,28 @@
 }
 
 .icon-paperclip, .icon-emoji {
-    color: #666; /* Adjust icon color */
+    color: #999; /* Gray color for emoji icon */
     cursor: pointer;
-    font-size: 18px; /* Adjust icon size */
+    font-size: 16px; /* Slightly smaller icon size */
 }
 
 /* Send button styling */
 .send-btn {
-    background-color: #4051fa;
-    color: #fff;
+    background-color: #007bff;
+    color: white;
     border: none;
     border-radius: 5px;
-    padding: 5px 10px; /* Reduced padding for smaller height and width */
+    padding: 6px 12px;
     cursor: pointer;
-    font-size: 14px;
-    min-width: 60px; /* Adjusted min-width for the smaller size */
+    font-size: 12px;
+    font-weight: 500;
+    min-width: 50px;
+    transition: all 0.3s ease;
+}
+
+.send-btn:hover {
+    background-color: #0056b3;
+    color: white;
 }
 
 /* Styling for message bubbles */
@@ -271,4 +317,134 @@
     order: 2; /* Ensure the bubble comes after the icon */
     margin-left: 20px; /* Explicitly add space after the icon, adjust as needed */
     margin-right: 0; /* Ensure no conflicting right margin */
+}
+
+/* Contact form styling */
+.contact-form {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+}
+
+.contact-form h4 {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.contact-form label {
+    display: block;
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.contact-form input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.contact-form input:focus {
+    outline: none;
+    border-color: #8A2BE2;
+    box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.2);
+}
+
+.contact-form-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.contact-form-submit {
+    background-color: #d0c419;
+    color: #333;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.contact-form-submit:hover {
+    background-color: #b8a815;
+    color: #fff;
+}
+
+.contact-form-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.contact-form-cancel {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/* Animated dots for loading indicator */
+.animated-dots {
+    display: inline-block;
+    position: relative;
+}
+
+.animated-dots .dot {
+    display: inline-block;
+    animation: dotAnimation 1.4s infinite;
+    opacity: 0;
+    margin-left: 2px;
+}
+
+.animated-dots .dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.animated-dots .dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.animated-dots .dot:nth-child(4) {
+    animation-delay: 0.6s;
+}
+
+@keyframes dotAnimation {
+    0%, 20% {
+        opacity: 0;
+        transform: translateY(0);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-2px);
+    }
+    80%, 100% {
+        opacity: 0;
+        transform: translateY(0);
+    }
+}
+
+/* Red thank you message styling */
+.thank-you-message {
+    color: #dc3545 !important;
+    font-weight: 600;
+    text-shadow: 0 0 2px rgba(220, 53, 69, 0.3);
+}
+
+/* Red validation error message styling */
+.validation-error-message {
+    color: #dc3545 !important;
+    font-weight: 600;
+    text-shadow: 0 0 2px rgba(220, 53, 69, 0.3);
 }

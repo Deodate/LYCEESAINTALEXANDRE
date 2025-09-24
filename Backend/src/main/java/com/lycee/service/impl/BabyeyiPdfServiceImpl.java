@@ -97,12 +97,19 @@ public class BabyeyiPdfServiceImpl implements BabyeyiPdfService {
 
     @Override
     public Optional<BabyeyiPdfResponse> updatePdf(Long id, BabyeyiPdfRequest request, User user) {
-        // If user is null (unauthenticated), find by ID only
-        Optional<BabyeyiPdf> pdfOptional;
-        if (user == null) {
+        // First try to find PDF by ID and user (user-owned PDF)
+        Optional<BabyeyiPdf> pdfOptional = babyeyiPdfRepository.findByIdAndUser(id, user);
+        
+        // If not found, try to find by ID only (for PDFs without user association)
+        if (!pdfOptional.isPresent()) {
             pdfOptional = babyeyiPdfRepository.findByIdAndStatus(id, "ACTIVE");
-        } else {
-            pdfOptional = babyeyiPdfRepository.findByIdAndUser(id, user);
+            
+            // If found but has no user, assign it to the current user
+            if (pdfOptional.isPresent() && pdfOptional.get().getUser() == null) {
+                BabyeyiPdf pdf = pdfOptional.get();
+                pdf.setUser(user);
+                babyeyiPdfRepository.save(pdf);
+            }
         }
         
         return pdfOptional.map(pdf -> {

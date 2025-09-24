@@ -12,6 +12,7 @@ const BabyeyiLetter = () => {
   const [fontFamily, setFontFamily] = useState('Times New Roman');
   const [fontSize, setFontSize] = useState('12');
   const [textAlign, setTextAlign] = useState('left');
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const editorRef = useRef(null);
   const navigate = useNavigate();
 
@@ -143,13 +144,23 @@ const BabyeyiLetter = () => {
     }
   }, [content]);
 
-  // Focus editor and set cursor position on component mount
+  // Check authentication and focus editor on component mount
   useEffect(() => {
+    // Check if user is authenticated
+    if (!isUserAuthenticated()) {
+      console.log('❌ User not authenticated, redirecting to login');
+      alert('Please sign in to access the Babyeyi Letter Editor.');
+      navigate('/signin');
+      return;
+    }
+    
+    console.log('✅ User authenticated, proceeding with editor setup');
+    
     if (editorRef.current) {
-      // Focus the editor
+      // Focus the editor only on initial mount
       editorRef.current.focus();
       
-      // Set cursor to the beginning
+      // Set cursor to the beginning only on initial mount
       const range = document.createRange();
       const selection = window.getSelection();
       
@@ -159,7 +170,7 @@ const BabyeyiLetter = () => {
       selection.removeAllRanges();
       selection.addRange(range);
     }
-  }, [content]); // Re-focus when content changes
+  }, [navigate]); // Only run on mount, not when content changes
 
   // Font families
   const fontFamilies = [
@@ -293,23 +304,53 @@ const BabyeyiLetter = () => {
     }
   };
 
+  // Helper function to get valid authentication token
+  const getAuthToken = () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('No authentication token found');
+    }
+    
+    // Validate token format
+    const tokenParts = token.split('.');
+    if (tokenParts.length !== 3) {
+      throw new Error('Invalid token format');
+    }
+    
+    // Validate token expiration
+    try {
+      const payload = JSON.parse(atob(tokenParts[1]));
+      const currentTime = Math.floor(Date.now() / 1000);
+      
+      if (payload.exp <= currentTime) {
+        throw new Error('Token has expired');
+      }
+    } catch (error) {
+      throw new Error('Invalid token payload');
+    }
+    
+    return token;
+  };
+
   const handleSave = async () => {
     if (content.trim()) {
       try {
         console.log('Starting PDF generation process...');
         
-        // Check if user is properly authenticated
-        if (!isUserAuthenticated()) {
-          alert('You must be logged in to update content. Please sign in first.');
+        // Get and validate authentication token
+        let token;
+        try {
+          token = getAuthToken();
+          console.log('🔍 Token validation successful:', { hasToken: !!token, tokenLength: token.length });
+        } catch (authError) {
+          console.error('❌ Authentication error:', authError.message);
+          alert(`Authentication failed: ${authError.message}. Please sign in again.`);
           localStorage.removeItem('token');
           localStorage.removeItem('isLoggedIn');
+          // Redirect to login page
+          navigate('/signin');
           return;
         }
-        
-        const token = localStorage.getItem('token');
-        console.log('🔍 Token check:', { hasToken: !!token, tokenLength: token ? token.length : 0 });
-        
-        // Token is already validated by isUserAuthenticated() helper
         
         // Always get the latest record to update
         console.log('Fetching latest record for update...');
@@ -458,9 +499,9 @@ const BabyeyiLetter = () => {
           // Update database
           await updateDatabase(latestRecordId, content, pdfDataUrl);
           
-          // Navigate to the PDF viewer
-          navigate('/babyeyi');
-          alert("Letter submitted successfully! Redirecting to PDF viewer...");
+          setShowSuccessMessage(true);
+          // Hide success message after 3 seconds
+          setTimeout(() => setShowSuccessMessage(false), 3000);
           return;
         }
         
@@ -504,17 +545,23 @@ const BabyeyiLetter = () => {
         localStorage.setItem('babyeyiContent', content);
         
         // Update database
-        await updateDatabase(latestRecordId, content, pdfDataUrl);
-        
-        // Navigate to the PDF viewer
-        navigate('/babyeyi');
-        
-        console.log('PDF generated and stored:', { 
-          dataUrlLength: pdfDataUrl.length,
-          contentLength: content.length 
-        });
-        
-        alert("Letter submitted successfully! Redirecting to PDF viewer...");
+        try {
+          await updateDatabase(latestRecordId, content, pdfDataUrl);
+          console.log('✅ Database update successful');
+          
+          console.log('PDF generated and stored:', { 
+            dataUrlLength: pdfDataUrl.length,
+            contentLength: content.length 
+          });
+          
+          setShowSuccessMessage(true);
+          // Hide success message after 3 seconds
+          setTimeout(() => setShowSuccessMessage(false), 3000);
+        } catch (dbError) {
+          console.error('❌ Database update failed:', dbError);
+          // Don't show alert here as updateDatabase already handles it
+          return;
+        }
       } catch (error) {
         console.error('PDF generation error:', error);
         console.error('Error details:', {
@@ -532,12 +579,9 @@ const BabyeyiLetter = () => {
   // Helper function to update database
   const updateDatabase = async (latestRecordId, content, pdfDataUrl) => {
     try {
-      const token = localStorage.getItem('token');
-      console.log('🔍 updateDatabase token check:', { hasToken: !!token, tokenLength: token ? token.length : 0 });
-      
-      if (!token) {
-        throw new Error('No authentication token found');
-      }
+      // Get and validate authentication token
+      const token = getAuthToken();
+      console.log('🔍 updateDatabase token validation successful:', { hasToken: !!token, tokenLength: token.length });
       
       console.log('Updating existing PDF record...', { 
         hasToken: !!token, 
@@ -567,8 +611,13 @@ const BabyeyiLetter = () => {
       
       console.log('🔍 Request headers:', {
         'Content-Type': headers['Content-Type'],
-        'Authorization': headers['Authorization'] ? 'Bearer [TOKEN]' : 'No token'
+        'Authorization': 'Bearer [TOKEN]'
       });
+      
+      // Debug: Log the actual token being sent (first 50 chars)
+      console.log('🔍 Actual token being sent:', token.substring(0, 50) + '...');
+      
+      console.log('📡 Making PUT request to:', `http://localhost:9090/api/babyeyi-pdf/update/${latestRecordId}`);
       
       // Always use PUT to update existing record
       const response = await fetch(`http://localhost:9090/api/babyeyi-pdf/update/${latestRecordId}`, {
@@ -583,13 +632,22 @@ const BabyeyiLetter = () => {
       if (response.ok) {
         const result = await response.json();
         console.log('✅ PDF updated successfully:', result);
-        alert('PDF updated successfully!');
+        return result;
       } else if (response.status === 401) {
         // Handle authentication error
-        console.error('❌ Authentication failed');
-        alert('Authentication failed. Please sign in again.');
-        localStorage.removeItem('token'); // Clear invalid token
-        // Don't navigate - stay on current page
+        const errorText = await response.text();
+        console.error('❌ Authentication failed:', errorText);
+        throw new Error('Authentication failed. Please sign in again.');
+      } else if (response.status === 403) {
+        // Handle forbidden error
+        const errorText = await response.text();
+        console.error('❌ Access forbidden:', errorText);
+        throw new Error('Access denied. You do not have permission to update this content.');
+      } else if (response.status === 404) {
+        // Handle not found error
+        const errorText = await response.text();
+        console.error('❌ PDF not found:', errorText);
+        throw new Error('PDF record not found. Please try creating a new one.');
       } else {
         const errorText = await response.text();
         console.error('❌ Failed to update PDF:', {
@@ -597,16 +655,25 @@ const BabyeyiLetter = () => {
           statusText: response.statusText,
           errorText: errorText
         });
-        alert(`Failed to update PDF: ${response.status} ${response.statusText}`);
+        throw new Error(`Server error: ${response.status} ${response.statusText}`);
       }
-    } catch (apiError) {
-      console.error('❌ API connection error:', apiError);
-      if (apiError.message === 'No authentication token found') {
-        alert('You must be logged in to update content. Please sign in first.');
-      } else {
-        alert(`API connection error: ${apiError.message}. Make sure the backend server is running on port 8080.`);
+    } catch (error) {
+      console.error('❌ updateDatabase error:', error);
+      
+      // Handle specific authentication errors
+      if (error.message.includes('Authentication failed') || 
+          error.message.includes('No authentication token found') ||
+          error.message.includes('Invalid token')) {
+        alert(error.message);
+        localStorage.removeItem('token');
+        localStorage.removeItem('isLoggedIn');
+        navigate('/signin');
+        return;
       }
-      // Continue with local storage even if API fails
+      
+      // Handle other errors
+      alert(`Failed to update content: ${error.message}`);
+      throw error;
     }
   };
 
@@ -618,73 +685,218 @@ const BabyeyiLetter = () => {
   };
 
   const handlePrint = () => {
-    if (editorRef.current) {
-      const printWindow = window.open('', '', 'width=600,height=600');
+    if (editorRef.current && content.trim()) {
+      try {
+        const printWindow = window.open('', '', 'width=800,height=600');
 
-      printWindow.document.open();
-      printWindow.document.write(`
-      <html>
-        <head>
-          <title>Printed Document</title>
-          <style>
-            body { 
-              font-family: Arial, sans-serif; 
-              color: black; 
-              margin: 20px;
-            }
-            ol.roman { list-style-type: lower-roman; }
-            ol.alpha { list-style-type: lower-alpha; }
-          </style>
-        </head>
-        <body>
-          ${editorRef.current.innerHTML}
-        </body>
-      </html>
-    `);
-      printWindow.document.close();
+        printWindow.document.open();
+        printWindow.document.write(`
+        <html>
+          <head>
+            <title>Babyeyi Letter - Print</title>
+            <style>
+              @media print {
+                body { 
+                  font-family: Arial, sans-serif; 
+                  color: black; 
+                  margin: 20px;
+                  line-height: 1.6;
+                }
+                .header {
+                  text-align: center;
+                  margin-bottom: 30px;
+                  border-bottom: 2px solid #333;
+                  padding-bottom: 20px;
+                }
+                .content {
+                  margin-top: 20px;
+                }
+                ol.roman { list-style-type: lower-roman; }
+                ol.alpha { list-style-type: lower-alpha; }
+                ul { list-style-type: disc; }
+                ol { list-style-type: decimal; }
+                h1, h2, h3 { margin-top: 20px; margin-bottom: 10px; }
+                p { margin-bottom: 10px; }
+              }
+              @media screen {
+                body { 
+                  font-family: Arial, sans-serif; 
+                  color: black; 
+                  margin: 20px;
+                  line-height: 1.6;
+                }
+                .header {
+                  text-align: center;
+                  margin-bottom: 30px;
+                  border-bottom: 2px solid #333;
+                  padding-bottom: 20px;
+                }
+                .content {
+                  margin-top: 20px;
+                }
+                ol.roman { list-style-type: lower-roman; }
+                ol.alpha { list-style-type: lower-alpha; }
+                ul { list-style-type: disc; }
+                ol { list-style-type: decimal; }
+                h1, h2, h3 { margin-top: 20px; margin-bottom: 10px; }
+                p { margin-bottom: 10px; }
+              }
+            </style>
+          </head>
+          <body>
+            <div class="header">
+              <h1>REPUBLIC OF RWANDA</h1>
+              <h2>MINISTRY OF EDUCATION</h2>
+              <h3>LYCEE SAINT ALEXANDRE SAULI DE MUHURA</h3>
+              <p>ESTERN - GATSIBO - MUHURA - TABA - KANYINYA</p>
+              <p>Phone: 0788862998 E-mail: lycemuhura@gmail.com</p>
+            </div>
+            <div class="content">
+              ${editorRef.current.innerHTML}
+            </div>
+          </body>
+        </html>
+      `);
+        printWindow.document.close();
 
-      printWindow.print();
-      printWindow.close();
+        // Wait for content to load before printing
+        printWindow.onload = () => {
+          printWindow.print();
+          printWindow.close();
+        };
+      } catch (error) {
+        console.error('Print error:', error);
+        alert('Failed to open print dialog. Please try again.');
+      }
+    } else {
+      alert("Please enter some content before printing.");
     }
   };
 
   const handleDownloadPDF = async () => {
     if (editorRef.current && content.trim()) {
       try {
-        // Create PDF using jsPDF with text content
-        const pdf = new jsPDF({
-          orientation: 'portrait',
-          unit: 'mm',
-          format: 'a4'
-        });
-
-        // Set font and size
-        pdf.setFont('helvetica');
-        pdf.setFontSize(12);
-
-        // Get the text content (strip HTML tags)
-        const textContent = editorRef.current.innerText || editorRef.current.textContent;
+        console.log('Starting PDF download generation...');
         
-        // Split text into lines that fit the page width
-        const pageWidth = pdf.internal.pageSize.getWidth() - 20; // 10mm margin on each side
-        const lines = pdf.splitTextToSize(textContent, pageWidth);
-
-        // Add text to PDF
-        let yPosition = 20; // Start 20mm from top
-        const lineHeight = 7; // 7mm line height
+        // Create a temporary container for PDF generation
+        const tempContainer = document.createElement('div');
+        tempContainer.style.position = 'absolute';
+        tempContainer.style.left = '-9999px';
+        tempContainer.style.top = '0';
+        tempContainer.style.width = '600px';
+        tempContainer.style.backgroundColor = 'white';
+        tempContainer.style.padding = '20px';
+        tempContainer.style.fontFamily = 'Arial, sans-serif';
+        tempContainer.style.fontSize = '12px';
+        tempContainer.style.lineHeight = '1.6';
+        tempContainer.style.color = '#333';
         
-        lines.forEach((line, index) => {
-          // Check if we need a new page
-          if (yPosition > pdf.internal.pageSize.getHeight() - 20) {
+        // Create header
+        const headerHTML = `
+          <div style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid #333; padding-bottom: 20px;">
+            <h1 style="font-size: 16px; font-weight: bold; margin: 0 0 5px 0;">REPUBLIC OF RWANDA</h1>
+            <h2 style="font-size: 14px; font-weight: bold; margin: 0 0 5px 0;">MINISTRY OF EDUCATION</h2>
+            <h3 style="font-size: 18px; font-weight: bold; margin: 0 0 10px 0;">LYCEE SAINT ALEXANDRE SAULI DE MUHURA</h3>
+            <p style="font-size: 10px; margin: 2px 0;">ESTERN - GATSIBO - MUHURA - TABA - KANYINYA</p>
+            <p style="font-size: 10px; margin: 2px 0;">Phone: 0788862998 E-mail: lycemuhura@gmail.com</p>
+          </div>
+        `;
+        
+        // Add header and content
+        tempContainer.innerHTML = headerHTML + editorRef.current.innerHTML;
+        
+        // Append to body temporarily
+        document.body.appendChild(tempContainer);
+        
+        // Wait for content to render
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        try {
+          // Generate PDF using html2canvas
+          const canvas = await html2canvas(tempContainer, {
+            scale: 1,
+            useCORS: false,
+            allowTaint: true,
+            backgroundColor: '#ffffff',
+            width: 600,
+            height: tempContainer.scrollHeight,
+            logging: false,
+            removeContainer: true,
+            foreignObjectRendering: false,
+            imageTimeout: 5000
+          });
+          
+          // Remove temporary container
+          document.body.removeChild(tempContainer);
+          
+          // Create PDF from canvas
+          const imgData = canvas.toDataURL('image/jpeg', 0.9);
+          const pdf = new jsPDF('p', 'mm', 'a4');
+          const imgWidth = 210; // A4 width in mm
+          const pageHeight = 295; // A4 height in mm
+          const imgHeight = (canvas.height * imgWidth) / canvas.width;
+          
+          let heightLeft = imgHeight;
+          let position = 0;
+          
+          // Add first page
+          pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
+          
+          // Add additional pages if needed
+          while (heightLeft >= 0) {
+            position = heightLeft - imgHeight;
             pdf.addPage();
-            yPosition = 20;
+            pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
           }
           
-          pdf.text(line, 10, yPosition);
-          yPosition += lineHeight;
-        });
-
-        pdf.save('babyeyi_letter.pdf');
+          // Save the PDF
+          pdf.save('babyeyi_letter.pdf');
+          console.log('PDF downloaded successfully');
+          
+        } catch (canvasError) {
+          console.error('Canvas generation failed, using fallback method:', canvasError);
+          
+          // Remove temporary container
+          document.body.removeChild(tempContainer);
+          
+          // Fallback: Create PDF with text content
+          const pdf = new jsPDF('p', 'mm', 'a4');
+          
+          // Add header
+          pdf.setFontSize(16);
+          pdf.setFont('helvetica', 'bold');
+          pdf.text('REPUBLIC OF RWANDA', 105, 20, { align: 'center' });
+          pdf.setFontSize(14);
+          pdf.text('MINISTRY OF EDUCATION', 105, 30, { align: 'center' });
+          pdf.setFontSize(18);
+          pdf.text('LYCEE SAINT ALEXANDRE SAULI DE MUHURA', 105, 40, { align: 'center' });
+          pdf.setFontSize(10);
+          pdf.text('ESTERN - GATSIBO - MUHURA - TABA - KANYINYA', 105, 50, { align: 'center' });
+          pdf.text('Phone: 0788862998 E-mail: lycemuhura@gmail.com', 105, 60, { align: 'center' });
+          
+          // Add content
+          pdf.setFontSize(12);
+          pdf.setFont('helvetica', 'normal');
+          
+          const textContent = editorRef.current.innerText || editorRef.current.textContent;
+          const lines = pdf.splitTextToSize(textContent, 180);
+          let yPosition = 80;
+          
+          for (let i = 0; i < lines.length; i++) {
+            if (yPosition > 270) {
+              pdf.addPage();
+              yPosition = 20;
+            }
+            pdf.text(lines[i], 15, yPosition);
+            yPosition += 7;
+          }
+          
+          pdf.save('babyeyi_letter.pdf');
+          console.log('PDF downloaded successfully (fallback method)');
+        }
+        
       } catch (error) {
         console.error('PDF generation error:', error);
         alert('Failed to generate PDF. Please try again.');
@@ -697,6 +909,22 @@ const BabyeyiLetter = () => {
   return (
     <div className="babyeyi-editor-container">
       <h2 className="babyeyi-title">Babyeyi Letter Editor</h2>
+      
+      {/* Success Message */}
+      {showSuccessMessage && (
+        <div style={{
+          backgroundColor: '#d4edda',
+          color: '#155724',
+          padding: '12px 20px',
+          borderRadius: '4px',
+          marginBottom: '20px',
+          border: '1px solid #c3e6cb',
+          textAlign: 'center',
+          fontWeight: 'bold'
+        }}>
+          Babyeyi letter updated Successfully!
+        </div>
+      )}
 
       {/* MS Word Style Toolbar */}
       <div className="babyeyi-toolbar">
