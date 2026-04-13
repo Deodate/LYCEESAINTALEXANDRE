@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../App.css'; // Import App.css for styling
+import { setAuthToken } from '../utils/authSession';
 
 const Signin = () => {
   const [activeTab, setActiveTab] = useState('login'); // State to track active tab
@@ -257,8 +258,7 @@ const Signin = () => {
           
           // Store authentication token and user data
           if (result.data && result.data.accessToken) {
-            localStorage.setItem('token', result.data.accessToken);
-            localStorage.setItem('isLoggedIn', 'true');
+            setAuthToken(result.data.accessToken);
             localStorage.setItem('user', JSON.stringify({
               email: loginFormData.username,
               id: result.data.id,

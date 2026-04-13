@@ -8,6 +8,8 @@ import com.lycee.entity.ChatInquiry;
 import com.lycee.entity.ChatReply;
 import com.lycee.service.ChatInquiryService;
 import com.lycee.service.ChatReplyService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
@@ -18,6 +20,7 @@ import java.time.LocalDateTime;
 @RestController
 @RequestMapping("/api/v1/chat-conversation")
 @CrossOrigin(origins = "*")
+@Tag(name = "4. Chat conversation")
 public class ChatConversationController {
 
     private final ChatInquiryService chatInquiryService;
@@ -32,6 +35,7 @@ public class ChatConversationController {
      * Record user information when bot asks for names
      * This endpoint is called when the bot asks "Please give us your names."
      */
+    @Operation(summary = "Record visitor name and phone from bot conversation")
     @PostMapping("/record-user-info")
     public ResponseEntity<?> recordUserInfo(@RequestBody ChatConversationRequest request) {
         try {
@@ -93,6 +97,7 @@ public class ChatConversationController {
     /**
      * Search for user conversations by name or phone number
      */
+    @Operation(summary = "Search conversations by name or phone")
     @GetMapping("/search")
     public ResponseEntity<?> searchConversations(
             @RequestParam(required = false) String name,
@@ -114,6 +119,7 @@ public class ChatConversationController {
     /**
      * Get all conversations with pagination
      */
+    @Operation(summary = "List all conversations with pagination")
     @GetMapping("/all")
     public ResponseEntity<?> getAllConversations(
             @RequestParam(defaultValue = "0") int page,
@@ -135,6 +141,7 @@ public class ChatConversationController {
     /**
      * Get conversation statistics
      */
+    @Operation(summary = "Get conversation statistics")
     @GetMapping("/statistics")
     public ResponseEntity<?> getConversationStatistics() {
         try {
@@ -154,6 +161,7 @@ public class ChatConversationController {
     /**
      * Send a reply to a conversation
      */
+    @Operation(summary = "Post admin reply to a conversation")
     @PostMapping("/reply")
     public ResponseEntity<?> sendReply(@RequestBody ChatReplyRequest request) {
         try {
@@ -205,6 +213,7 @@ public class ChatConversationController {
     /**
      * Get all replies for a conversation
      */
+    @Operation(summary = "List replies for a conversation")
     @GetMapping("/{conversationId}/replies")
     public ResponseEntity<?> getConversationReplies(@PathVariable Long conversationId) {
         try {

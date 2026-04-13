@@ -39,6 +39,21 @@ public class User {
     @Column(name = "reset_token_expiry_date")
     private Date resetTokenExpiryDate;
 
+    @Column(name = "enabled", nullable = false)
+    private boolean enabled = true;
+
+    @Column(name = "verification_token")
+    private String verificationToken;
+
+    @Column(name = "verification_token_expiry")
+    private Date verificationTokenExpiry;
+
+    @Column(name = "verification_otp", length = 6)
+    private String verificationOtp;
+
+    @Column(name = "verification_otp_expiry")
+    private Date verificationOtpExpiry;
+
     // Constructors
     public User() {
     }
@@ -133,4 +148,45 @@ public class User {
     public void setResetTokenExpiryDate(Date resetTokenExpiryDate) {
         this.resetTokenExpiryDate = resetTokenExpiryDate;
     }
-} 
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getVerificationToken() {
+        return verificationToken;
+    }
+
+    public void setVerificationToken(String verificationToken) {
+        this.verificationToken = verificationToken;
+    }
+
+    public Date getVerificationTokenExpiry() {
+        return verificationTokenExpiry;
+    }
+
+    public void setVerificationTokenExpiry(Date verificationTokenExpiry) {
+        this.verificationTokenExpiry = verificationTokenExpiry;
+    }
+
+    public String getVerificationOtp() {
+        return verificationOtp;
+    }
+
+    public void setVerificationOtp(String verificationOtp) {
+        this.verificationOtp = verificationOtp;
+    }
+
+    public Date getVerificationOtpExpiry() {
+        return verificationOtpExpiry;
+    }
+
+    public void setVerificationOtpExpiry(Date verificationOtpExpiry) {
+        this.verificationOtpExpiry = verificationOtpExpiry;
+    }
+}
+

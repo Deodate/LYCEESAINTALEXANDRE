@@ -448,3 +448,19 @@
     font-weight: 600;
     text-shadow: 0 0 2px rgba(220, 53, 69, 0.3);
 }
+
+/* Clear fixed mobile bottom nav (48px) + spacing */
+@media (max-width: 991px) {
+    .chat-container {
+        bottom: calc(48px + 16px);
+        right: 14px;
+        z-index: 1002;
+    }
+}
+
+@media (max-width: 576px) {
+    .chat-toggle-btn {
+        width: 40px;
+        height: 40px;
+    }
+}

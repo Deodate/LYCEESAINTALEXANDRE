@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './index.css';
 import UsersServices from "../service/UsersServices";
+import { setAuthToken } from "../../../utils/authSession";
 
 const LoginAuth = () => {
     // State to handle form input values and error messages
@@ -42,7 +43,7 @@ const LoginAuth = () => {
         if (validateForm()) {
             try {
                 const data = await UsersServices.login(email, password);
-                localStorage.setItem('token', data.token);
+                setAuthToken(data.token);
                 navigate("/dashboard");
             } catch (error) {
                 console.error("Login failed:", error);

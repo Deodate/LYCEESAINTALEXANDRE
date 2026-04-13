@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './Components/pages/Home/Home';
@@ -7,6 +7,7 @@ import Contacts from './Components/pages/Contacts/Contacts';
 import Footer from './Components/pages/Footer/Footer';
 import Top from './Components/pages/Top/Top';
 import NavigationMenu from './Components/pages/Menu/Menu';
+import MobileBottomNav from './Components/pages/MobileBottomNav/MobileBottomNav';
 import Babyeyi from './Components/pages/Babyeyi/Babyeyi';
 import DioceseByumba from './Components/pages/DioceseByumba/DioceseByumba';
 import VisionValues from './Components/pages/VisionValues/VisionValues';
@@ -19,10 +20,56 @@ import DashboardLayout from './Components/pages/Dashboard/DashboardLayout';
 import TailwindTest from './TailwindTest';
 import ProtectedRoute from './Components/auth/ProtectedRoute';
 import { NotificationProvider } from './context/NotificationContext';
+import CookieConsent from './Components/CookieConsent';
+import Privacy from './Components/pages/Privacy/Privacy';
+import { useCookieInit } from './hooks/useCookieInit';
+
+const DOCUMENT_TITLE_SUFFIX = ' - Lycée Saint Alexandre Muhura';
+
+function documentTitleForPath(pathname) {
+  const path = pathname.split('?')[0].replace(/\/+$/, '') || '/';
+
+  const exact = {
+    '/': 'Home',
+    '/about': 'About',
+    '/VisionValues': 'Vision & Values',
+    '/Inspiration': 'Inspiration',
+    '/DioceseByumba': 'Diocese Byumba',
+    '/contacts': 'Contacts',
+    '/privacy': 'Privacy',
+    '/babyeyi': 'Babyeyi',
+    '/newsEvents': 'News & Events',
+    '/signin': 'Sign in',
+    '/tailwind-test': 'Tailwind Test',
+    '/arts': 'Arts',
+    '/athletics': 'Athletics',
+  };
+
+  if (exact[path]) {
+    return `${exact[path]}${DOCUMENT_TITLE_SUFFIX}`;
+  }
+  if (path.startsWith('/dashboard')) {
+    return `Dashboard${DOCUMENT_TITLE_SUFFIX}`;
+  }
+  if (path.startsWith('/academics')) {
+    return `Academics${DOCUMENT_TITLE_SUFFIX}`;
+  }
+  if (path.startsWith('/students')) {
+    return `Student Life${DOCUMENT_TITLE_SUFFIX}`;
+  }
+  return `Home${DOCUMENT_TITLE_SUFFIX}`;
+}
 
 function App() {
   const location = useLocation();
   const isDashboard = location.pathname.startsWith('/dashboard');
+
+  useCookieInit();
+
+  useEffect(() => {
+    document.title = documentTitleForPath(location.pathname);
+  }, [location.pathname]);
+
   return (
     <NotificationProvider>
       <div className="App">
@@ -50,6 +97,7 @@ function App() {
         <Route path="/Inspiration" element={<Inspiration />} />
         <Route path="/DioceseByumba" element={<DioceseByumba />} />
         <Route path="/contacts" element={<Contacts />} />
+        <Route path="/privacy" element={<Privacy />} />
         <Route path="/babyeyi" element={<Babyeyi />} />
         <Route path="/academics/*" element={<Home />} />
         <Route path="/newsEvents" element={<NewsEvents />} />
@@ -74,6 +122,8 @@ function App() {
         </>
       )}
       </div>
+      {!isDashboard && <MobileBottomNav />}
+      <CookieConsent />
     </div>
     </NotificationProvider>
   );

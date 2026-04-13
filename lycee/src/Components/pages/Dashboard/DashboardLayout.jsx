@@ -11,6 +11,7 @@ import StudentList from '../Authentications/studentsList';
 import DioceseByumba from '../DioceseByumba/DioceseByumba';
 import { useNavigate } from 'react-router-dom';
 import { useNotifications } from '../../../context/NotificationContext';
+import { getAuthToken, clearAuthToken } from '../../../utils/authSession';
 import './Dashboard.css';
 
 const DashboardLayout = () => {
@@ -141,8 +142,8 @@ const DashboardLayout = () => {
     setIsLoggingOut(true);
     
     try {
-      const token = localStorage.getItem('token');
-      
+      const token = getAuthToken();
+
       if (token) {
         // Call the backend logout API
         const response = await fetch('http://localhost:9090/api/v1/auth/logout', {
@@ -163,8 +164,7 @@ const DashboardLayout = () => {
     // Wait for 5 seconds with loading animation
     setTimeout(() => {
       // Clear all authentication data
-      localStorage.removeItem('token');
-      localStorage.removeItem('isLoggedIn');
+      clearAuthToken();
       localStorage.removeItem('user');
       localStorage.removeItem('babyeyiGeneratedPDF');
       localStorage.removeItem('babyeyiContent');
@@ -179,10 +179,10 @@ const DashboardLayout = () => {
 
     // Quick authentication check for direct URL access
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = getAuthToken();
     const isLoggedIn = localStorage.getItem('isLoggedIn');
-    
-    if (!token || !isLoggedIn) {
+
+    if (!token || isLoggedIn !== 'true') {
       console.log('No authentication found, redirecting to signin');
       navigate("/signin", { state: { from: { pathname: '/dashboard' } } });
       return;
@@ -193,6 +193,7 @@ const DashboardLayout = () => {
       const tokenParts = token.split('.');
       if (tokenParts.length !== 3) {
         console.log('Invalid token format');
+        clearAuthToken();
         navigate("/signin", { state: { from: { pathname: '/dashboard' } } });
         return;
       }
@@ -202,15 +203,13 @@ const DashboardLayout = () => {
       
       if (payload.exp < currentTime) {
         console.log('Token expired');
-        localStorage.removeItem('token');
-        localStorage.removeItem('isLoggedIn');
+        clearAuthToken();
         navigate("/signin", { state: { from: { pathname: '/dashboard' } } });
         return;
       }
     } catch (error) {
       console.error('Token validation error:', error);
-      localStorage.removeItem('token');
-      localStorage.removeItem('isLoggedIn');
+      clearAuthToken();
       navigate("/signin", { state: { from: { pathname: '/dashboard' } } });
       return;
     }

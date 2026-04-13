@@ -4,6 +4,7 @@ import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import { useNavigate } from 'react-router-dom';
 import LogoSchool from '../../../assets/images/LogoSchool.png';
+import { getAuthToken as getStoredAuthToken, clearAuthToken } from '../../../utils/authSession';
 import './Babyeyi.css';
 
 const BabyeyiLetter = () => {
@@ -281,10 +282,10 @@ const BabyeyiLetter = () => {
 
   // Helper function to check if user is properly authenticated
   const isUserAuthenticated = () => {
-    const token = localStorage.getItem('token');
+    const token = getStoredAuthToken();
     const isLoggedIn = localStorage.getItem('isLoggedIn');
-    
-    if (!token || !isLoggedIn) {
+
+    if (!token || isLoggedIn !== 'true') {
       return false;
     }
     
@@ -305,8 +306,8 @@ const BabyeyiLetter = () => {
   };
 
   // Helper function to get valid authentication token
-  const getAuthToken = () => {
-    const token = localStorage.getItem('token');
+  const requireValidAccessToken = () => {
+    const token = getStoredAuthToken();
     if (!token) {
       throw new Error('No authentication token found');
     }
@@ -340,13 +341,12 @@ const BabyeyiLetter = () => {
         // Get and validate authentication token
         let token;
         try {
-          token = getAuthToken();
+          token = requireValidAccessToken();
           console.log('🔍 Token validation successful:', { hasToken: !!token, tokenLength: token.length });
         } catch (authError) {
           console.error('❌ Authentication error:', authError.message);
           alert(`Authentication failed: ${authError.message}. Please sign in again.`);
-          localStorage.removeItem('token');
-          localStorage.removeItem('isLoggedIn');
+          clearAuthToken();
           // Redirect to login page
           navigate('/signin');
           return;
@@ -580,7 +580,7 @@ const BabyeyiLetter = () => {
   const updateDatabase = async (latestRecordId, content, pdfDataUrl) => {
     try {
       // Get and validate authentication token
-      const token = getAuthToken();
+      const token = requireValidAccessToken();
       console.log('🔍 updateDatabase token validation successful:', { hasToken: !!token, tokenLength: token.length });
       
       console.log('Updating existing PDF record...', { 
@@ -665,8 +665,7 @@ const BabyeyiLetter = () => {
           error.message.includes('No authentication token found') ||
           error.message.includes('Invalid token')) {
         alert(error.message);
-        localStorage.removeItem('token');
-        localStorage.removeItem('isLoggedIn');
+        clearAuthToken();
         navigate('/signin');
         return;
       }

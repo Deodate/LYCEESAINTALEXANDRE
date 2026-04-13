@@ -5,6 +5,8 @@ import com.lycee.dto.response.ApiResponse;
 import com.lycee.dto.response.ErrorResponse;
 import com.lycee.entity.ChatInquiry;
 import com.lycee.service.ChatInquiryService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
@@ -14,6 +16,7 @@ import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/api/v1/chat-inquiries")
+@Tag(name = "3. Chat inquiries")
 public class ChatInquiryController {
 
     private final ChatInquiryService service;
@@ -22,6 +25,7 @@ public class ChatInquiryController {
         this.service = service;
     }
 
+    @Operation(summary = "Submit new chat inquiry")
     @PostMapping
     public ResponseEntity<?> create(@RequestBody ChatInquiryRequest body) {
         try {
@@ -50,6 +54,7 @@ public class ChatInquiryController {
         }
     }
 
+    @Operation(summary = "Search inquiries by name or phone")
     @GetMapping("/search")
     public ResponseEntity<?> search(@RequestParam(required = false) String name,
                                     @RequestParam(required = false) String phoneNumber) {

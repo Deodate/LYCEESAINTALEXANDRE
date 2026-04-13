@@ -36,8 +36,8 @@ const HomepageContainer = () => {
       </div>
 
       <div className="welcome-section">
-        <h1 className="Welcome-title">Welcome to LSASM</h1>
-        <p className="Welcome-text">
+        <h1 className="welcome-title">Welcome to LSASM</h1>
+        <p className="welcome-text">
         Lycée Saint Alexandre Sauli de Muhura in Rwanda is a TVET College with a vision to empower and prepare their students for the labour market and self-employment. Their mission is to create a good learning environment which meets the Education, Training and Development expectations of their students.
         </p>
       </div>
@@ -108,7 +108,7 @@ const HomepageContainer = () => {
             </div>
           </div>
           
-          <div className="col-lg-6 p-0">
+          <div className="col-lg-6 p-0 numbers-visual-col">
             <img
               src={studentsImage}
               alt="Students walking on school"

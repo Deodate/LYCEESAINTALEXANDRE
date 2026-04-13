@@ -30,7 +30,7 @@ const NewsSection = () => {
     <div className="container-fluid news-section py-5">
       <div className="row">
         {/* Left Column - Header */}
-        <div className="col-lg-3">
+        <div className="col-12 col-lg-3 mb-4 mb-lg-0">
           <h2 className="news-title mb-4">Latest News</h2>
           <div className="green-line"></div>
           <p className="news-description mb-4">
@@ -51,10 +51,10 @@ const NewsSection = () => {
         </div>
 
         {/* Right Column - News Grid */}
-        <div className="col-lg-9">
-          <div className="row">
+        <div className="col-12 col-lg-9">
+          <div className="row g-3">
             {newsItems.map((item, index) => (
-              <div key={index} className="col-md-4 mb-4">
+              <div key={index} className="col-12 col-sm-6 col-md-4 mb-4">
                 <a href={item.link} className="news-card text-decoration-none">
                   <div className="news-image-wrapper mb-3">
                     <img

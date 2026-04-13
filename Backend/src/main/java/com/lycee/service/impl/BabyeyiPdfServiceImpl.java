@@ -6,20 +6,22 @@ import com.lycee.entity.BabyeyiPdf;
 import com.lycee.entity.User;
 import com.lycee.repository.BabyeyiPdfRepository;
 import com.lycee.service.BabyeyiPdfService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class BabyeyiPdfServiceImpl implements BabyeyiPdfService {
 
-    @Autowired
-    private BabyeyiPdfRepository babyeyiPdfRepository;
+    private final BabyeyiPdfRepository babyeyiPdfRepository;
+
+    public BabyeyiPdfServiceImpl(BabyeyiPdfRepository babyeyiPdfRepository) {
+        this.babyeyiPdfRepository = babyeyiPdfRepository;
+    }
 
     @Override
     public BabyeyiPdfResponse createPdf(BabyeyiPdfRequest request, User user) {
@@ -52,7 +54,7 @@ public class BabyeyiPdfServiceImpl implements BabyeyiPdfService {
         return babyeyiPdfRepository.findByUserOrderByCreatedAtDesc(user)
                 .stream()
                 .map(this::convertToResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -66,7 +68,7 @@ public class BabyeyiPdfServiceImpl implements BabyeyiPdfService {
         return babyeyiPdfRepository.findByUserAndStatusOrderByCreatedAtDesc(user, "ACTIVE")
                 .stream()
                 .map(this::convertToResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -75,7 +77,7 @@ public class BabyeyiPdfServiceImpl implements BabyeyiPdfService {
                 .stream()
                 .filter(pdf -> "ACTIVE".equals(pdf.getStatus()))
                 .map(this::convertToResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -84,7 +86,7 @@ public class BabyeyiPdfServiceImpl implements BabyeyiPdfService {
                 .stream()
                 .filter(pdf -> "ACTIVE".equals(pdf.getStatus()))
                 .map(this::convertToResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -92,7 +94,7 @@ public class BabyeyiPdfServiceImpl implements BabyeyiPdfService {
         return babyeyiPdfRepository.findByStatusOrderByCreatedAtDesc("ACTIVE")
                 .stream()
                 .map(this::convertToResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -101,7 +103,7 @@ public class BabyeyiPdfServiceImpl implements BabyeyiPdfService {
         Optional<BabyeyiPdf> pdfOptional = babyeyiPdfRepository.findByIdAndUser(id, user);
         
         // If not found, try to find by ID only (for PDFs without user association)
-        if (!pdfOptional.isPresent()) {
+        if (pdfOptional.isEmpty()) {
             pdfOptional = babyeyiPdfRepository.findByIdAndStatus(id, "ACTIVE");
             
             // If found but has no user, assign it to the current user
@@ -138,7 +140,7 @@ public class BabyeyiPdfServiceImpl implements BabyeyiPdfService {
     public boolean permanentlyDeletePdf(Long id, User user) {
         return babyeyiPdfRepository.findByIdAndUser(id, user)
                 .map(pdf -> {
-                    babyeyiPdfRepository.delete(pdf);
+                    babyeyiPdfRepository.delete(Objects.requireNonNull(pdf));
                     return true;
                 })
                 .orElse(false);

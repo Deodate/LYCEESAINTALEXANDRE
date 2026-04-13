@@ -8,6 +8,8 @@ import com.lycee.exception.ValidationException;
 import com.lycee.mapper.ChatboltMapper;
 import com.lycee.service.ChatboltService;
 import com.lycee.validation.ChatMessageValidator;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/chatbolt")
+@Tag(name = "5. Chatbolt")
 public class ChatboltController {
 
     private final ChatboltService chatboltService;
@@ -30,6 +33,7 @@ public class ChatboltController {
         this.chatMessageValidator = chatMessageValidator;
     }
 
+    @Operation(summary = "Save chatbot message")
     @PostMapping
     public ResponseEntity<Object> saveChatMessage(@RequestBody ChatboltRequest chatboltRequest) {
         try {
@@ -47,6 +51,7 @@ public class ChatboltController {
         }
     }
 
+    @Operation(summary = "List all chatbot messages")
     @GetMapping
     public ResponseEntity<Object> getAllChatMessages() {
         try {

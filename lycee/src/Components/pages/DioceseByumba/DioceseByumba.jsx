@@ -1,6 +1,6 @@
 import React from 'react';
-import './DioceseByumba.css';  
-import schoolImage from '../../../assets/images/Papias.jpg';
+import './DioceseByumba.css';
+import schoolImage from '../../../assets/images/Papias-hero.jpg';
 
 const DioceseByumba = () => {
   return (
@@ -27,7 +27,14 @@ const DioceseByumba = () => {
           </div>
         </div>
         <div className="image-sections">
-          <img src={schoolImage} alt="School leadership" />
+          <img
+            src={schoolImage}
+            alt="Mgr Papias Musengamana, Byumba Diocese"
+            width={1400}
+            height={1866}
+            decoding="async"
+            fetchPriority="high"
+          />
           <p className="from-pope-francis">--- Mgr Papias MUSENGAMANA</p>
         </div>
       </div>

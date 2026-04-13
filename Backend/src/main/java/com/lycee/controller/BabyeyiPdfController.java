@@ -1,11 +1,15 @@
 package com.lycee.controller;
 
+import com.lycee.config.OpenApiConfig;
 import com.lycee.dto.request.BabyeyiPdfRequest;
 import com.lycee.dto.response.ApiResponse;
 import com.lycee.dto.response.BabyeyiPdfResponse;
 import com.lycee.entity.User;
 import com.lycee.service.BabyeyiPdfService;
 import com.lycee.service.AuthService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +26,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/babyeyi-pdf")
 @CrossOrigin(origins = "*")
+@Tag(name = "2. Babyeyi")
 public class BabyeyiPdfController {
 
     @Autowired
@@ -31,6 +36,8 @@ public class BabyeyiPdfController {
     private AuthService authService;
 
     // Create a new PDF - Requires authentication
+    @SecurityRequirement(name = OpenApiConfig.BEARER_AUTH)
+    @Operation(summary = "Create PDF for authenticated user")
     @PostMapping("/create")
     public ResponseEntity<ApiResponse<BabyeyiPdfResponse>> createPdf(
             @Valid @RequestBody BabyeyiPdfRequest request,
@@ -65,6 +72,8 @@ public class BabyeyiPdfController {
     }
 
     // Update existing PDF - Requires authentication
+    @SecurityRequirement(name = OpenApiConfig.BEARER_AUTH)
+    @Operation(summary = "Update PDF by id")
     @PutMapping("/update/{id}")
     public ResponseEntity<ApiResponse<BabyeyiPdfResponse>> updatePdf(
             @PathVariable Long id,
@@ -105,6 +114,7 @@ public class BabyeyiPdfController {
     }
 
     // Get PDF by ID
+    @Operation(summary = "Get PDF metadata by id (public)")
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<BabyeyiPdfResponse>> getPdfById(@PathVariable Long id) {
         try {
@@ -126,6 +136,8 @@ public class BabyeyiPdfController {
     }
 
     // Get PDF by ID for current user
+    @SecurityRequirement(name = OpenApiConfig.BEARER_AUTH)
+    @Operation(summary = "Get current user's PDF by id")
     @GetMapping("/my/{id}")
     public ResponseEntity<ApiResponse<BabyeyiPdfResponse>> getMyPdfById(
             @PathVariable Long id,
@@ -150,6 +162,8 @@ public class BabyeyiPdfController {
     }
 
     // Get all PDFs for current user
+    @SecurityRequirement(name = OpenApiConfig.BEARER_AUTH)
+    @Operation(summary = "List current user's PDFs")
     @GetMapping("/my")
     public ResponseEntity<ApiResponse<List<BabyeyiPdfResponse>>> getMyPdfs(Authentication authentication) {
         try {
@@ -168,6 +182,8 @@ public class BabyeyiPdfController {
     }
 
     // Get all PDFs for current user with pagination
+    @SecurityRequirement(name = OpenApiConfig.BEARER_AUTH)
+    @Operation(summary = "List current user's PDFs with pagination")
     @GetMapping("/my/paginated")
     public ResponseEntity<ApiResponse<Page<BabyeyiPdfResponse>>> getMyPdfsPaginated(
             @RequestParam(defaultValue = "0") int page,
@@ -190,6 +206,7 @@ public class BabyeyiPdfController {
     }
 
     // Search PDFs by title
+    @Operation(summary = "Search PDFs by title (public)")
     @GetMapping("/search")
     public ResponseEntity<ApiResponse<List<BabyeyiPdfResponse>>> searchPdfs(
             @RequestParam String title) {
@@ -208,6 +225,8 @@ public class BabyeyiPdfController {
     }
 
     // Search PDFs by title for current user
+    @SecurityRequirement(name = OpenApiConfig.BEARER_AUTH)
+    @Operation(summary = "Search current user's PDFs by title")
     @GetMapping("/my/search")
     public ResponseEntity<ApiResponse<List<BabyeyiPdfResponse>>> searchMyPdfs(
             @RequestParam String title,
@@ -228,6 +247,8 @@ public class BabyeyiPdfController {
     }
 
     // Delete PDF (soft delete)
+    @SecurityRequirement(name = OpenApiConfig.BEARER_AUTH)
+    @Operation(summary = "Soft-delete PDF by id")
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<String>> deletePdf(
             @PathVariable Long id,
@@ -253,6 +274,8 @@ public class BabyeyiPdfController {
     }
 
     // Get PDF data for download
+    @SecurityRequirement(name = OpenApiConfig.BEARER_AUTH)
+    @Operation(summary = "Get PDF payload for download (authenticated owner)")
     @GetMapping("/{id}/download")
     public ResponseEntity<ApiResponse<String>> downloadPdf(
             @PathVariable Long id,
@@ -278,6 +301,8 @@ public class BabyeyiPdfController {
     }
 
     // Get PDF count for current user
+    @SecurityRequirement(name = OpenApiConfig.BEARER_AUTH)
+    @Operation(summary = "Count active PDFs for current user")
     @GetMapping("/my/count")
     public ResponseEntity<ApiResponse<Long>> getMyPdfCount(Authentication authentication) {
         try {
@@ -296,6 +321,7 @@ public class BabyeyiPdfController {
     }
 
     // Public endpoint to get the latest PDF (no authentication required)
+    @Operation(summary = "Get latest active PDF (public)")
     @GetMapping("/latest")
     public ResponseEntity<ApiResponse<BabyeyiPdfResponse>> getLatestPdf() {
         try {
@@ -318,6 +344,7 @@ public class BabyeyiPdfController {
     }
 
     // Public endpoint to get the latest PDF data for download (no authentication required)
+    @Operation(summary = "Get latest PDF data for download (public)")
     @GetMapping("/latest/download")
     public ResponseEntity<ApiResponse<String>> downloadLatestPdf() {
         try {

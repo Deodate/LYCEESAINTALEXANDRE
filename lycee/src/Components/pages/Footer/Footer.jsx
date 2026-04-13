@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
+  const year = new Date().getFullYear();
+
   return (
     <footer>
       <div className="footer-content">
@@ -54,7 +56,7 @@ const Footer = () => {
             <Link to="/terms">Terms of Use</Link>
             <Link to="/signin">Site Login</Link>
           </div>
-          <p>© 2024 Lycee Saint Alexandre Sauli Muhura</p>
+          <p>© {year} Lycee Saint Alexandre Sauli Muhura</p>
         </div>
       </div>
     </footer>

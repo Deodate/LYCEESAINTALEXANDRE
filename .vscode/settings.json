@@ -1,4 +1,8 @@
 {
-    "java.compile.nullAnalysis.mode": "automatic",
-    "java.configuration.updateBuildConfiguration": "automatic"
+  // AuthService (and similar) can show phantom "duplicate method" / stray `}` errors when
+  // null-analysis + a stale JDT workspace get out of sync. If errors persist: Command Palette
+  // → "Java: Clean Java Language Server Workspace", then reload; or open the Backend folder as the workspace root.
+  "java.compile.nullAnalysis.mode": "disabled",
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.import.gradle.enabled": false
 }

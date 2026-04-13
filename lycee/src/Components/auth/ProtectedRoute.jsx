@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
+import { getAuthToken, clearAuthToken } from '../../utils/authSession';
 
 const ProtectedRoute = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -9,10 +10,10 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     const checkAuthentication = () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = getAuthToken();
         const isLoggedIn = localStorage.getItem('isLoggedIn');
-        
-        if (!token || !isLoggedIn) {
+
+        if (!token || isLoggedIn !== 'true') {
           setIsAuthenticated(false);
           setIsLoading(false);
           return;
@@ -22,6 +23,7 @@ const ProtectedRoute = ({ children }) => {
         const tokenParts = token.split('.');
         if (tokenParts.length !== 3) {
           console.log('Invalid token format');
+          clearAuthToken();
           setIsAuthenticated(false);
           setIsLoading(false);
           return;
@@ -33,8 +35,7 @@ const ProtectedRoute = ({ children }) => {
           
           if (payload.exp < currentTime) {
             console.log('Token expired');
-            localStorage.removeItem('token');
-            localStorage.removeItem('isLoggedIn');
+            clearAuthToken();
             setIsAuthenticated(false);
             setIsLoading(false);
             return;
@@ -44,8 +45,7 @@ const ProtectedRoute = ({ children }) => {
           setIsLoading(false);
         } catch (error) {
           console.error('Token validation error:', error);
-          localStorage.removeItem('token');
-          localStorage.removeItem('isLoggedIn');
+          clearAuthToken();
           setIsAuthenticated(false);
           setIsLoading(false);
         }
